@@ -14,6 +14,7 @@ require("conform").setup({
 		markdown = { "prettierd" },
 		python = { "ruff_format", "ruff_organize_imports" },
 		rust = { "rustfmt" },
+		svelte = { "prettierd" },
 		tex = { "latexindent" },
 		typescript = { "prettierd" },
 		yaml = { "prettierd" },

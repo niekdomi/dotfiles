@@ -141,6 +141,7 @@ vim.pack.add({
 
 	-- Others
 	{ src = "https://github.com/Exafunction/windsurf.nvim" },
+	{ src = "https://github.com/Fildo7525/pretty_hover" },
 	{ src = "https://github.com/gbprod/substitute.nvim" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
@@ -317,4 +318,9 @@ require("todo-comments").setup({
 
 require("yazi").setup({
 	open_for_directories = true,
+})
+
+require("pretty_hover").setup({
+	max_width = 70,
+	border = "rounded",
 })

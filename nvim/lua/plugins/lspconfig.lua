@@ -82,7 +82,7 @@ vim.lsp.config.lua_ls = {
 -----------------------------------------------------------
 -- Diagnostic signs configuration
 -----------------------------------------------------------
-local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
 local signConf = { text = {}, texthl = {}, numhl = {} }
 
 for type, icon in pairs(signs) do
@@ -90,15 +90,15 @@ for type, icon in pairs(signs) do
 	local severity = vim.diagnostic.severity[severityName]
 	local hl = "DiagnosticSign" .. type
 
-	signConf.text[severity] = icon
-	signConf.texthl[severity] = hl
+	-- signConf.text[severity] = icon
+	signConf.text[severity] = ""
+	signConf.texthl[severity] = ""
 	signConf.numhl[severity] = hl
 end
 
 -- LSP keybindings and configuration
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local bufnr = args.buf
 		local opts = { buffer = bufnr, silent = true }
 		local keymap = vim.keymap
@@ -127,7 +127,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		opts.desc = "Show documentation"
 		keymap.set("n", "K", function()
-			vim.lsp.buf.hover({ border = "rounded", max_width = 70 })
+			require("pretty_hover").hover()
+			-- vim.lsp.buf.hover({ border = "rounded", max_width = 70 })
 		end, opts)
 
 		-- This disables the css color highlighting from the lsp,
@@ -137,11 +138,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- -- Workspace diagnostics
--- vim.keymap.set("n", "<leader>x", function()
--- 	vim.lsp.buf.workspace_diagnostics()
--- end, { desc = "Request workspace diagnostics" })
+vim.keymap.set("n", "<leader>x", function()
+	vim.lsp.buf.workspace_diagnostics()
+end, { desc = "Request workspace diagnostics" })
 
 vim.diagnostic.config({
+	float = {
+		border = "rounded",
+		max_width = 70,
+	},
 	signs = signConf,
 })
 

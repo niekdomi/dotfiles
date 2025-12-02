@@ -22,8 +22,8 @@ mouse-hide-while-typing
 
 # Window
 unfocused-split-opacity = 1
-window-height = 29
-window-width = 83
+window-height = 28
+window-width = 90
 
 # Cell
 adjust-cell-height = 15%
@@ -35,6 +35,7 @@ confirm-close-surface = false
 
 # Miscellaneous
 gtk-toolbar-style = flat
+custom-shader = cursor_sweep.glsl
 
 ### Keybinds
 keybind = ctrl+shift+r=reload_config
