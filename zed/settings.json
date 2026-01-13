@@ -1,3 +1,4 @@
+// vim: set filetype=jsonc:
 // ISSUES:
 //
 // - Plugins:
@@ -8,9 +9,7 @@
 //    - In-Editor PDF-Viewer (needed?)
 //   - TODO-comments
 //   - Bugs:
-//     - snippets for extensions not working
 //     - Java go to definition not working
-//     - Java treesitter selection not working
 //     - C# go to definition results in empty file
 // - VIM:
 //   - Block comments with gbc not available
@@ -23,7 +22,6 @@
 //   - Show live changes when changing regex with %s  https://github.com/zed-industries/zed/issues/4411
 //   - Vim mode in rename pop-up
 //   - % navigation (bash, lua, etc.)
-//   - zL/zH doesn't move cursor
 //   - scrolling shouldn't exceed last line, only with zz e.g.
 //   - Which-key like window
 //   - Insert from Register-overview when pressing "
@@ -38,7 +36,6 @@
 //   - Cursor animation
 //   - Change editor size with ctrl+scroll
 //   - Show amount of copilot options e.g. 2/7
-//   - Obsidian alternative
 //   - Render markdown like obsidian (would be nice for text thread)
 //   - Proper CMake implementation (for nice c++ development)
 //   - HTML in Editor preview (Web page preview)
@@ -46,8 +43,7 @@
 //   - PDF Viewer
 //   - Better outline
 //   - Undotree
-//   - Codeium support
-//   - Zen-mode disable border
+//   - Revert shitty completion ui/bindings
 //   - Inverted cursor color
 //   - Ligatures under cursor not rendered correctly
 //   - autocompletion: Better UI
@@ -55,13 +51,12 @@
 // - Terminal:
 //   - Italic text
 //   - Ligatures
-//   - Starship prompt ugly af
+//   - Starship prompt buggy
 //   - Render TUI border correctly
 //   - Image preview
 
 {
   // Updating with package manager
-  "format_on_save": "on",
   "auto_update": false,
 
   // Auto-install extensions
@@ -69,12 +64,13 @@
     "basher": true,
     "catppuccin": true,
     "catppuccin-icons": true,
-    "cspell": true,
+    "cspell": false, // Should use codebook at a certain point
+    "golangci-lint": true,
     "html": true,
     "latex": true,
     "lua": true,
     "toml": true,
-    "xml": true
+    "xml": true,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
@@ -82,50 +78,53 @@
   // ╰──────────────────────────────────────────────────────────╯
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
   // │ UI                                                       │
   // ╰──────────────────────────────────────────────────────────╯
   "collaboration_panel": {
-    "button": false
+    "button": false,
+  },
+  "git_panel": {
+    "tree_view": true,
   },
   "gutter": {
     "folds": false,
-    "min_line_number_digits": 3
+    "min_line_number_digits": 3,
     // "runnables": false
   },
   "notification_panel": {
-    "button": false
+    "button": false,
   },
   "outline_panel": {
     "button": false,
-    "dock": "right"
+    "dock": "right",
   },
   "project_panel": {
     "folder_icons": false,
     "hide_root": true,
     "indent_size": 25,
-    "sticky_scroll": false
+    "sticky_scroll": false,
   },
   "tab_bar": {
     "show": true,
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
   },
   "search": {
-    "button": true
+    "button": true,
   },
   "tabs": {
     "git_status": true,
-    "file_icons": true
+    "file_icons": true,
   },
   "title_bar": {
-    "show_branch_icon": true
+    "show_branch_icon": true,
   },
   "toolbar": {
     "breadcrumbs": false,
-    "quick_actions": false
+    "quick_actions": false,
   },
   "zoomed_padding": false,
 
@@ -139,46 +138,49 @@
       "enabled": true,
       "update_debounce_ms": 150,
       "padding": 2,
-      "max_severity": "warning"
-    }
+      "max_severity": "warning",
+    },
   },
   "git": {
     "inline_blame": {
       "enabled": true,
       "delay_ms": 1000,
-      "show_commit_summary": true
-    }
+      "show_commit_summary": true,
+    },
   },
   "hide_mouse": "on_typing_and_movement",
   "inline_code_actions": false,
   "middle_click_paste": false,
   "vertical_scroll_margin": 0,
+  "beam_jump": true,
 
   // ╭──────────────────────────────────────────────────────────╮
   // │ Vim                                                      │
   // ╰──────────────────────────────────────────────────────────╯
   "vim_mode": true,
   "cursor_blink": false,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   // "scroll_beyond_last_line": "off",
   "scrollbar": {
-    "show": "never"
+    "show": "never",
   },
   "vim": {
-    "highlight_on_yank_duration": 0
+    "highlight_on_yank_duration": 0,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
   // │ Font                                                     │
   // ╰──────────────────────────────────────────────────────────╯
   "ui_font_size": 15,
-  "buffer_font_size": 14,
-  "buffer_line_height": "standard",
-  "buffer_font_weight": 300,
+  "buffer_font_size": 14.0,
+  "buffer_line_height": {
+    "custom": 1.4,
+  },
+  "buffer_font_weight": 350.0,
 
-  "buffer_font_family": "CaskaydiaCove Nerd Font",
+  "buffer_font_family": ".ZedMono",
   "buffer_font_features": {
-    "ss19": true
+    "ss19": true,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
@@ -187,63 +189,37 @@
   "theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "icon_theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
 
   // ╭──────────────────────────────────────────────────────────╮
   // │ Assistant                                                │
   // ╰──────────────────────────────────────────────────────────╯
   "agent": {
-    "use_modifier_to_send": false,
-    "play_sound_when_agent_done": false,
-    "profiles": {
-      "write": {
-        "name": "Write",
-        "tools": {
-          "copy_path": true,
-          "create_directory": true,
-          "delete_path": false,
-          "diagnostics": true,
-          "edit_file": true,
-          "fetch": true,
-          "list_directory": true,
-          "project_notifications": false,
-          "move_path": true,
-          "now": true,
-          "find_path": true,
-          "read_file": true,
-          "grep": true,
-          "terminal": true,
-          "thinking": true,
-          "web_search": true,
-          "open": false
-        },
-        "enable_all_context_servers": true,
-        "context_servers": {}
-      }
-    },
-    "always_allow_tool_actions": true,
-    "default_profile": "write",
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "grok-code-fast-1"
+      "model": "grok-code-fast-1",
     },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "grok-code-fast-1"
-    }
+      "model": "claude-sonnet-4.5",
+    },
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
+    "model_parameters": [],
+    "use_modifier_to_send": true,
   },
-  "show_edit_predictions": false,
+  "show_edit_predictions": true,
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "edit_predictions": {
-    "mode": "eager"
+    "mode": "eager",
   },
   "disable_ai": false,
 
@@ -254,14 +230,14 @@
     "dock": "bottom",
     "line_height": "standard",
     "toolbar": {
-      "breadcrumbs": false
+      "breadcrumbs": false,
     },
     "font_family": "CaskaydiaCove Nerd Font Mono",
     "font_features": {
-      "ss19": true
+      "ss19": true,
     },
     "font_size": 14,
-    "font_weight": 360
+    "font_weight": 360,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
@@ -277,14 +253,14 @@
           "--issues-exit-code=1",
           "--show-stats=false",
           "--fix",
-          "--enable-only=wsl_v5"
-        ]
-      }
+          "--enable-only=wsl_v5",
+        ],
+      },
     },
     "gopls": {
       "initialization_options": {
         "analyses": {
-          "unusedparams": true
+          "unusedparams": true,
         },
         "gofumpt": true,
         "staticcheck": true,
@@ -296,9 +272,9 @@
           "constantValues": true,
           "functionTypeParameters": true,
           "parameterNames": true,
-          "rangeVariableTypes": true
-        }
-      }
+          "rangeVariableTypes": true,
+        },
+      },
     },
     "texlab": {
       "settings": {
@@ -309,8 +285,8 @@
             // "executable": "tectonic",
             // "args": ["-Z", "shell-escape", "%f"]
             "executable": "pdflatex",
-            "args": ["--shell-escape", "%f"]
-          }
+            "args": ["--shell-escape", "%f"],
+          },
         },
         "forwardSearch": {
           "executable": "zathura",
@@ -319,11 +295,11 @@
             "%l:1:%f",
             "-x",
             "zed %%{input}:%%{line}",
-            "%p"
-          ]
-        }
-      }
-    }
+            "%p",
+          ],
+        },
+      },
+    },
   },
 
   // ╭──────────────────────────────────────────────────────────╮
@@ -331,41 +307,40 @@
   // ╰──────────────────────────────────────────────────────────╯
   "languages": {
     "C": {
-      "format_on_save": "on"
+      "format_on_save": "on",
     },
     "C++": {
-      "show_edit_predictions": false,
-      "format_on_save": "on"
+      "format_on_save": "on",
     },
     "CSharp": {
       "formatter": {
         "external": {
           "command": "csharpier",
-          "arguments": ["format"]
-        }
-      }
+          "arguments": ["format"],
+        },
+      },
     },
     "Go": {
-      "language_servers": ["gopls", "golangci-lint"]
+      "language_servers": ["gopls", "golangci-lint"],
     },
     "Markdown": {
-      "format_on_save": "on"
+      "format_on_save": "on",
     },
     "LaTeX": {
       "formatter": {
         "external": {
           "command": "latexindent",
-          "arguments": ["-m", "-rv", "-l"]
-        }
-      }
+          "arguments": ["-m", "-rv", "-l"],
+        },
+      },
     },
     "Lua": {
       "formatter": {
         "external": {
           "command": "stylua",
-          "arguments": ["--stdin-filepath", "{buffer_path}", "-"]
-        }
-      }
+          "arguments": ["--stdin-filepath", "{buffer_path}", "-"],
+        },
+      },
     },
     "Python": {
       "language_servers": ["pyright", "ruff"],
@@ -374,11 +349,11 @@
         { "code_action": "source.fixAll.ruff" },
         {
           "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
-    }
+            "name": "ruff",
+          },
+        },
+      ],
+    },
   },
 
   // Italic fix
@@ -386,122 +361,122 @@
     "border.variant": "#00000000", // Remove border color
     "syntax": {
       "attribute": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "boolean": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "comment": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "comment.doc": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "constant": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "constructor": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "embedded": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "emphasis": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "emphasis.strong": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "enum": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "function": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "hint": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "keyword": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "label": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "link_text": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "link_uri": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "number": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "operator": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "predictive": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "preproc": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "primary": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "property": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "punctuation": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "punctuation.bracket": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "punctuation.delimiter": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "punctuation.list_marker": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "punctuation.special": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "string": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "string.escape": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "string.regex": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "string.special": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "string.special.symbol": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "tag": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "text.literal": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "title": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "type": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "variable": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "variable.special": {
-        "font_style": "italic"
+        "font_style": "italic",
       },
       "variant": {
-        "font_style": "italic"
-      }
-    }
-  }
+        "font_style": "italic",
+      },
+    },
+  },
 }

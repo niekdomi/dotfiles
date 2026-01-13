@@ -2,8 +2,8 @@
 dark = "catppuccin-mocha"
 light = "catppuccin-latte"
 
-[mgr]
-preview_hovered = { reversed = true }
+[indicator]
+preview = { reversed = true }
 
 [icon]
 files = [

@@ -2,29 +2,13 @@
   // Lazygit
   {
     "label": "LazyGit",
-    "command": "lazygit -p $ZED_WORKTREE_ROOT",
+    "command": "lazygit",
     "hide": "always",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
     "shell": {
-      "program": "/bin/fish"
-    }
-  },
-
-  // Run or compile file
-  {
-    "label": "Run file",
-    "command": "~/.config/zed/run_or_compile.sh run",
-    "use_new_terminal": false,
-    "allow_concurrent_runs": false,
-    "reveal": "no_focus"
-  },
-  {
-    "label": "Compile file",
-    "command": "~/.config/zed/run_or_compile.sh compile",
-    "use_new_terminal": false,
-    "allow_concurrent_runs": false,
-    "reveal": "no_focus"
+      "program": "/bin/fish",
+    },
   },
 
   // Yazi
@@ -35,8 +19,8 @@
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
     "shell": {
-      "program": "/bin/fish"
-    }
+      "program": "/bin/fish",
+    },
   },
 
   // Fuzzy Finder
@@ -47,25 +31,7 @@
     "allow_concurrent_runs": false,
     "use_new_terminal": true,
     "shell": {
-      "program": "/bin/fish"
-    }
+      "program": "/bin/fish",
+    },
   },
-
-  // LaTeX
-  // Compile LaTeX
-  {
-    "label": "Compile LaTeX",
-    "command": "tectonic",
-    "args": ["-X", "compile", "$ZED_FILENAME"],
-    "cwd": "$ZED_DIRNAME",
-    "reveal": "never",
-    "hide": "always"
-  },
-  {
-    "label": "Forward Search",
-    "command": "/usr/bin/zathura \"$ZED_DIRNAME/$ZED_STEM.pdf\" --synctex-forward \"$ZED_ROW:1:$ZED_DIRNAME/$ZED_STEM.tex\"",
-    "allow_concurrent_runs": false,
-    "reveal": "never",
-    "hide": "always"
-  }
 ]

@@ -1,10 +1,4 @@
 {
-  // EXPLORER
-  "explorer.autoReveal": false,
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.decorations.colors": false,
-
   // WORKBENCH
   "workbench.activityBar.location": "top",
   "workbench.editor.labelFormat": "default",
@@ -51,7 +45,9 @@
   "editor.suggest.showWords": false,
 
   "workbench.colorCustomizations": {
-    "editor.inlineValuesBackground": "#313244" // Example: Semi-transparent Red
+    // Change color of debug inline values
+    "editor.inlineValuesBackground": "#313244" // Dark
+    // "editor.inlineValuesBackground": "#dce0e8" // Light
   },
 
   // OTHER
@@ -163,9 +159,6 @@
     "editor.defaultFormatter": "golang.go"
   },
 
-  // *** JAVA ***
-  "redhat.telemetry.enabled": false,
-
   // *** PYLANCE ***
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "standard",
@@ -191,49 +184,32 @@
   "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
   "latex-workshop.synctex.afterBuild.enabled": true,
 
-  // *** C/CPP ***
-  // Ensure that gdb & gcc are installed
-  "C_Cpp.suggestSnippets": false,
-  "C_Cpp.autocompleteAddParentheses": true,
-  "C_Cpp.clang_format_fallbackStyle": "{\"BasedOnStyle\": \"LLVM\", \"IndentWidth\": 4, \"TabWidth\": 4}",
-  "C_Cpp.default.compilerPath": "",
-  "C_Cpp.default.includePath": ["/usr/include"],
-  "C_Cpp.inlayHints.parameterNames.enabled": true,
-  // "C_Cpp.intelliSenseEngine": "disabled",
-
-  // *** CODEIUM ***
-  "codeium.enableCodeLens": false,
-  "codeium.enableConfig": {
-    "*": true,
-    "html": false,
-    "plaintext": true,
-    "cpp": false
-  },
-
   // ╭──────────────────────────────────────────────────────────╮
   // │ ***** VIM KEYBINDINGS *****                              │
   // ╰──────────────────────────────────────────────────────────╯
   "flash-vscode.caseSensitive": false,
-  "vim.leader": "space", // Set space as leader
-  "vim.useSystemClipboard": true, // Enables copy to system clipboard
-  "vim.useCtrlKeys": true, // Override default behavior of ctrl keys
-  "vim.hlsearch": true, // Highlight search results
+  "vim.leader": "space",
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
   "extensions.experimental.affinity": {
-    // To improve performance
     "vscodevim.vim": 1
   },
 
   // ╭──────────────────────────────────────────────────────────╮
   // │ Editor/Editing                                           │
   // ╰──────────────────────────────────────────────────────────╯
-  "vim.insertModeKeyBindings": [{ "before": ["j", "k"], "after": ["<Esc>"] }], // Use jk to exit insert mode
-  "vim.visualModeKeyBindings": [{ "before": ["leader", "i"], "after": ["~"] }], // Toggle case
+  "vim.insertModeKeyBindings": [{ "before": ["j", "k"], "after": ["<Esc>"] }],
+  "vim.visualModeKeyBindings": [{ "before": ["leader", "i"], "after": ["~"] }],
   "vim.normalModeKeyBindingsNonRecursive": [
     // Flash.nvim
     { "before": ["s"], "commands": ["flash-vscode.start"] },
     { "before": ["<BS>"], "commands": ["flash-vscode.backspace"] },
 
-    { "before": ["K"], "after": ["g", "h"] } // Show definition
+    { "before": ["K"], "after": ["g", "h"] }, // Show definition
+
+    { "before": ["C-y"], "after": ["C-y", "C-y", "C-y"] },
+    { "before": ["C-e"], "after": ["C-e", "C-e", "C-e"] }
   ],
   "vim.normalModeKeyBindings": [
     { "before": ["Y"], "after": ["y", "$"] }, // Use neovim-like yank
@@ -281,52 +257,10 @@
     { "before": ["C-p"], "commands": ["workbench.action.nextEditor"] }, // Go to next tab
     { "before": ["C-n"], "commands": ["workbench.action.previousEditor"] }, // Go to previous tab
     {
-      // Open new tab
-      "before": ["leader", "n", "t"],
-      "commands": ["workbench.action.files.newUntitledFile"]
-    },
-    {
-      // Close active tab
-      "before": ["leader", "x"],
-      "commands": ["workbench.action.closeActiveEditor"]
-    },
-    {
       // Reopen closed tab
       "before": ["leader", "u"],
       "commands": ["workbench.action.reopenClosedEditor"]
     },
-
-    // ╭──────────────────────────────────────────────────────────╮
-    // │ Window tiling                                            │
-    // ╰──────────────────────────────────────────────────────────╯
-    {
-      // Split editor up
-      "before": ["leader", "s", "k"],
-      "commands": ["workbench.action.splitEditorUp"]
-    },
-    {
-      // Split editor down
-      "before": ["leader", "s", "j"],
-      "commands": ["workbench.action.splitEditorDown"]
-    },
-    {
-      // Split editor left
-      "before": ["leader", "s", "h"],
-      "commands": ["workbench.action.splitEditorLeft"]
-    },
-    {
-      // Split editor right
-      "before": ["leader", "s", "l"],
-      "commands": ["workbench.action.splitEditorRight"]
-    },
-
-    // ╭──────────────────────────────────────────────────────────╮
-    // │ Window navigation                                        │
-    // ╰──────────────────────────────────────────────────────────╯
-    { "before": ["C-k"], "commands": ["workbench.action.navigateUp"] }, // Move editor up
-    { "before": ["C-j"], "commands": ["workbench.action.navigateDown"] }, // Move editor down
-    { "before": ["C-h"], "commands": ["workbench.action.navigateLeft"] }, // Move editor left
-    { "before": ["C-l"], "commands": ["workbench.action.navigateRight"] }, // Move editor right
 
     // ╭──────────────────────────────────────────────────────────╮
     // │ Toggle panels                                            │
@@ -348,66 +282,6 @@
     },
 
     // ╭──────────────────────────────────────────────────────────╮
-    // │ Compile & Run & Debug                                    │
-    // ╰──────────────────────────────────────────────────────────╯
-    // The commands are normally like this:
-    // leader + leader + ([c]ompile/[r]un/[d]ebug) + *first letter of language*
-    // For example:
-    // leader + leader + r + c   -> Will run a c file
-    // Legend for what language which shortcut:
-    // c/c++    -> c
-    // CMake    -> m
-    // go       -> g
-    // java     -> j
-    // python   -> p
-    // rust     -> r
-
-    // C / C++
-    {
-      "before": ["leader", "leader", "d", "c"],
-      "commands": ["C_Cpp.BuildAndDebugFile"]
-    },
-    {
-      "before": ["leader", "leader", "r", "c"],
-      "commands": ["C_Cpp.BuildAndRunFile"]
-    },
-
-    // CMake
-    {
-      "before": ["leader", "leader", "s", "m"],
-      "commands": ["cmake.selectLaunchTarget"]
-    },
-    {
-      "before": ["leader", "leader", "r", "m"],
-      "commands": ["cmake.launchTarget"]
-    },
-    {
-      "before": ["leader", "leader", "b", "m"],
-      "commands": ["cmake.build"]
-    },
-
-    // LaTeX
-    {
-      "before": ["leader", "l", "c"],
-      "commands": ["latex-workshop.build"]
-    },
-    {
-      // Go to PDF location
-      "before": ["leader", "l", "p"],
-      "commands": ["latex-workshop.synctex"]
-    },
-
-    // Python
-    {
-      "before": ["leader", "leader", "d", "p"],
-      "commands": ["debugpy.debugInTerminal"]
-    },
-    {
-      "before": ["leader", "leader", "r", "p"],
-      "commands": ["python.execInTerminal-icon"]
-    },
-
-    // ╭──────────────────────────────────────────────────────────╮
     // │ Other commands                                           │
     // ╰──────────────────────────────────────────────────────────╯
     {
@@ -415,7 +289,6 @@
       "before": ["leader", ":"],
       "commands": ["workbench.action.showCommands"]
     },
-    { "before": ["leader", "/"], "commands": ["actions.find"] }, // Local search (or in file search)
     {
       // Find files
       "before": ["leader", "f", "f"],
@@ -468,29 +341,14 @@
   "workbench.settings.editor": "json",
   "terminal.external.linuxExec": "ghostty",
   "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.smoothScrolling": true,
   "notebook.lineNumbers": "on",
   "update.mode": "manual",
-  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
   "security.workspace.trust.enabled": false,
   "terminal.integrated.enableImages": true,
   "security.workspace.trust.startupPrompt": "never",
   "breadcrumbs.enabled": false,
-  "github.copilot.nextEditSuggestions.fixes": false,
   "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false,
-    "java": false
-  },
   "debug.showVariableTypes": true,
-  "chat.tools.terminal.autoApprove": {
-    "make": true,
-    "mvn test": true,
-    "mvn compile": true
-  },
-  "inlineChat.lineNaturalLanguageHint": false,
-  "github.copilot.selectedCompletionModel": ""
+  "chat.viewSessions.orientation": "stacked"
 }

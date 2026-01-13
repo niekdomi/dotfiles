@@ -110,6 +110,17 @@ vim.keymap.set("n", "<C-a>", function()
 end)
 
 -- ╭──────────────────────────────────────────────────────────╮
+-- │ Autocommands                                             │
+-- ╰──────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
+	pattern = "*",
+	callback = function()
+		vim.bo.endofline = false
+	end,
+})
+
+-- ╭──────────────────────────────────────────────────────────╮
 -- │ Plugins                                                  │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.pack.add({
@@ -120,9 +131,8 @@ vim.pack.add({
 
 	-- LSP, Auto-completion & Formatter
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" }, -- dep: mason, TODO: Drop
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/RRethy/vim-illuminate" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" }, -- TODO: Drop, is built-in but commands like `:LspRestart` will then be missing
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/stevearc/dressing.nvim" }, -- NOTE: Archived but still relevant (rename and code actions ui)
@@ -131,7 +141,6 @@ vim.pack.add({
 	-- Telescope
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
-	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 
 	-- Treesitter
@@ -141,7 +150,6 @@ vim.pack.add({
 
 	-- Others
 	{ src = "https://github.com/Exafunction/windsurf.nvim" },
-	{ src = "https://github.com/Fildo7525/pretty_hover" },
 	{ src = "https://github.com/gbprod/substitute.nvim" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
@@ -269,7 +277,6 @@ require("mason").setup()
 require("mason-lspconfig").setup({
 	automatic_enable = {
 		exclude = {
-			"cspell_ls",
 			"eslint-lsp",
 		},
 	},
@@ -320,7 +327,3 @@ require("yazi").setup({
 	open_for_directories = true,
 })
 
-require("pretty_hover").setup({
-	max_width = 70,
-	border = "rounded",
-})

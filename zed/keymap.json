@@ -1,45 +1,38 @@
 [
   {
     "bindings": {
-      "shift-enter": "workspace::ToggleZoom"
-    }
-  },
-  {
-    "context": "MessageEditor > Editor",
-    "bindings": {
-      "enter": "editor::Newline",
-      "ctrl-enter": "agent::Chat"
-    }
+      "shift-enter": "workspace::ToggleZoom",
+    },
   },
   {
     "context": "vim_mode != insert",
     "bindings": {
       // Go to next/previous selection
       "ctrl-k": "menu::SelectPrevious",
-      "ctrl-j": "menu::SelectNext"
-    }
+      "ctrl-j": "menu::SelectNext",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
       // Move to next/previous window
       "ctrl-p": "vim::GoToTab",
-      "ctrl-n": "vim::GoToPreviousTab"
-    }
+      "ctrl-n": "vim::GoToPreviousTab",
+    },
   },
   {
     "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
       // Toggle case
-      "space i": "vim::ChangeCase"
-    }
+      "space i": "vim::ChangeCase",
+    },
   },
   {
     "context": "vim_mode == insert || vim_mode == replace",
     "bindings": {
       // Leave insert mode with jk
-      "j k": "vim::NormalBefore"
-    }
+      "j k": "vim::NormalBefore",
+    },
   },
   {
     "context": "vim_mode == insert",
@@ -56,27 +49,25 @@
       // Assistant inline completion
       "ctrl-.": "editor::NextEditPrediction",
       "ctrl-,": "editor::PreviousEditPrediction",
-      "alt-space": "editor::AcceptPartialEditPrediction",
+      "alt-space": "editor::AcceptNextWordEditPrediction",
       "alt-f": "editor::AcceptEditPrediction",
       // Prevent tab from accepting suggestion
-      "tab": "editor::Tab"
-    }
+      "tab": "editor::Tab",
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
       // Disable cutting (Black-hole register)
       "x": ["workspace::SendKeystrokes", "\" _ x"],
-      "shift-x": ["workspace::SendKeystrokes", "\" _ shift-x"]
-    }
+      "shift-x": ["workspace::SendKeystrokes", "\" _ shift-x"],
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "s": "vim::PushSneak",
       "shift-s": "vim::PushSneakBackward",
-      // Why is this mapping missing?!
-      "ctrl-w t": "workspace::NewFile",
       // Repeat last macro
       "#": ["workspace::SendKeystrokes", "@ @"],
       // Settings file (not ui...)
@@ -88,6 +79,8 @@
       "space w": "workspace::Save",
       // Reopen last closed tab
       "space u": "pane::ReopenClosedItem",
+      // Match neovim's behavior
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
       // Toggle docks
       "space t j": "workspace::ToggleBottomDock",
       "space t h": "workspace::ToggleLeftDock",
@@ -122,51 +115,33 @@
       // Search files
       "space f f": "file_finder::Toggle",
       // Switch tab
-      "space s t": "tab_switcher::Toggle",
+      "space s t": "tab_switcher::ToggleAll",
       // *** Tasks ***
       // Task rerun
       "space r": "task::Rerun",
       // Lazygit
       "g l": [
         "task::Spawn",
-        { "task_name": "LazyGit", "reveal_target": "center" }
+        { "task_name": "LazyGit", "reveal_target": "center" },
       ],
       // Yazi
       "space e": [
         "task::Spawn",
-        { "task_name": "Yazi", "reveal_target": "center" }
+        { "task_name": "Yazi", "reveal_target": "center" },
       ],
       // Fuzzy finder
       "space f c": [
         "task::Spawn",
-        { "task_name": "Find in files", "reveal_target": "center" }
+        { "task_name": "Find in files", "reveal_target": "center" },
       ],
-      // // LaTeX
-      // // Compile LaTeX
-      // "space l c": [
-      //   "task::Spawn",
-      //   { "task_name": "Compile LaTeX", "reveal_target": "center" }
-      // ],
-      // // Forward search
-      // "space l p": [
-      //   "task::Spawn",
-      //   { "task_name": "Forward Search", "reveal_target": "center" }
-      // ],
-      // Run/Compile Code
-      // "space space r": ["task::Spawn", { "task_name": "Run file" }],
-      // "space space c": ["task::Spawn", { "task_name": "Compile file" }]
-      "space space a": ["task::Spawn", { "task_name": "Compile file" }], // The following four lines are a workaround
-      "space space b": ["task::Spawn", { "task_name": "Run file" }],
-      "space space r": ["workspace::SendKeystrokes", "space w space space b"],
-      "space space c": ["workspace::SendKeystrokes", "space w space space a"]
-    }
+    },
   },
   {
     "context": "(vim_mode == insert || vim_mode == normal) && showing_signature_help && !showing_completions",
     "bindings": {
       "ctrl-k": "editor::SignatureHelpPrevious",
-      "ctrl-j": "editor::SignatureHelpNext"
-    }
+      "ctrl-j": "editor::SignatureHelpNext",
+    },
   },
   {
     "context": "Terminal",
@@ -195,34 +170,7 @@
       "ctrl-shift-k": "workspace::ActivatePaneUp",
       "ctrl-shift-j": "workspace::ActivatePaneDown",
       "ctrl-shift-h": "workspace::ActivatePaneLeft",
-      "ctrl-shift-l": "workspace::ActivatePaneRight"
-    }
+      "ctrl-shift-l": "workspace::ActivatePaneRight",
+    },
   },
-  {
-    // nvim-tree like configuration
-    "context": "ProjectPanel && not_editing",
-    "bindings": {
-      "a": "project_panel::NewFile",
-      "A": "project_panel::NewDirectory",
-      "c": "project_panel::Copy",
-      "d": "project_panel::Delete",
-      "D": "project_panel::Trash",
-      "g y": "workspace::CopyPath",
-      "g e": "workspace::CopyRelativePath",
-      "o": "project_panel::Open",
-      "shift-o": "project_panel::OpenPermanent",
-      "p": "project_panel::Paste",
-      "q": "workspace::ToggleLeftDock",
-      "r": "project_panel::Rename",
-      "s": "workspace::OpenWithSystem",
-      "S": "project_panel::NewSearchInDirectory",
-      "W": "project_panel::CollapseAllEntries",
-      "x": "project_panel::Cut",
-      "y": "workspace::CopyPath",
-      "shift-y": "workspace::CopyRelativePath"
-      // `E` Expand All
-      // `H` Toggle Filter: Dotfiles
-      // `I` Toggle Filter: Git Ignore
-    }
-  }
 ]
