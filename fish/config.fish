@@ -75,7 +75,7 @@ alias svim="sudo -s -E nvim"
 alias gl="lazygit"
 
 ### Bat
-set -gx MANPAGER "nvim +Man!"
+set -gx MANPAGER "nvim -c 'set columns=80' +Man!"
 
 ### Zoxide
 alias z=__zoxide_z
