@@ -27,8 +27,11 @@ require("full-border"):setup({ type = ui.Border.ROUNDED })
 require("git"):setup()
 require("recycle-bin"):setup()
 require("relative-motions"):setup({
-	show_numbers = "relative",
+	show_numbers = "relative_absolute",
 	show_motion = true,
+	line_numbers_styles = {
+		hovered = ui.Style():bold():reverse(true),
+	},
 })
 require("starship"):setup({})
 require("searchjump"):setup({
