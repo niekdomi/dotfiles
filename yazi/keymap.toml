@@ -1,59 +1,60 @@
 # Manager configuration
 [mgr]
 prepend_keymap = [
-    # Relative motions
-    { on = ["1"], run = "plugin relative-motions 1", desc = "Move in relative steps" },
-    { on = ["2"], run = "plugin relative-motions 2", desc = "Move in relative steps" },
-    { on = ["3"], run = "plugin relative-motions 3", desc = "Move in relative steps" },
-    { on = ["4"], run = "plugin relative-motions 4", desc = "Move in relative steps" },
-    { on = ["5"], run = "plugin relative-motions 5", desc = "Move in relative steps" },
-    { on = ["6"], run = "plugin relative-motions 6", desc = "Move in relative steps" },
-    { on = ["7"], run = "plugin relative-motions 7", desc = "Move in relative steps" },
-    { on = ["8"], run = "plugin relative-motions 8", desc = "Move in relative steps" },
-    { on = ["9"], run = "plugin relative-motions 9", desc = "Move in relative steps" },
+  # Relative motions
+  { on = ["1"], run = "plugin relative-motions 1", desc = "Move in relative steps" },
+  { on = ["2"], run = "plugin relative-motions 2", desc = "Move in relative steps" },
+  { on = ["3"], run = "plugin relative-motions 3", desc = "Move in relative steps" },
+  { on = ["4"], run = "plugin relative-motions 4", desc = "Move in relative steps" },
+  { on = ["5"], run = "plugin relative-motions 5", desc = "Move in relative steps" },
+  { on = ["6"], run = "plugin relative-motions 6", desc = "Move in relative steps" },
+  { on = ["7"], run = "plugin relative-motions 7", desc = "Move in relative steps" },
+  { on = ["8"], run = "plugin relative-motions 8", desc = "Move in relative steps" },
+  { on = ["9"], run = "plugin relative-motions 9", desc = "Move in relative steps" },
 
-    # Compress files
-    { on = ["C", "z"], run = "plugin ouch zip", desc = "Compress  zip" },
-    { on = ["C", "t"], run = "plugin ouch tar", desc = "Compress  tar" },
+  # Compress files
+  { on = ["c", "a", "a"], run = "plugin compress", desc = "Archive selected files" },
+  { on = ["c", "a", "p"], run = "plugin compress -p", desc = "Archive selected files (password)" },
+  { on = ["c", "a", "h"], run = "plugin compress -ph", desc = "Archive selected files (password+header)" },
+  { on = ["c", "a", "l"], run = "plugin compress -l", desc = "Archive selected files (compression level)" },
+  { on = ["c", "a", "u"], run = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
 
-    # Lazygit
-    { on = ["L"], run = "plugin lazygit", desc = "Run LazyGit" },
+  # Lazygit
+  { on = ["L"], run = "plugin lazygit", desc = "Run LazyGit" },
 
-    # Toggle preview
-    { on = ["T"], run = "plugin toggle-pane min-preview", desc = "Toggle Preview" },
+  # Toggle preview
+  { on = ["T"], run = "plugin toggle-pane min-preview", desc = "Toggle Preview" },
 
-    # Restore deleted files
-    { on = "u", run = "plugin restore", desc = "Restore last deleted files/folders" },
+  # Restore deleted files
+  { on = "u", run = "plugin restore", desc = "Restore last deleted files/folders" },
 
-    # Browse trash-cli
-    { on = ["R","t"], run = "plugin recycle-bin", desc = "Trash-cli menu" },
+  # Disks
+  { on = "M", run = "plugin mount" },
 
-    # Disks
-    { on  = "M", run = "plugin mount" },
+  # Flash
+  { on = ["s"], run = "plugin searchjump", desc = "searchjump mode" },
 
-    # Flash
-    {on   = [ "s" ], run = "plugin searchjump", desc = "searchjump mode"},
+  # Marks
+  { on = ["m"], run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
+  { on = ["'"], run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
+  { on = ["b", "d"], run = "plugin bookmarks delete", desc = "Delete a bookmark" },
+  { on = ["b", "D"], run = "plugin bookmarks delete_all", desc = "Delete all bookmarks" },
 
-    # Marks
-    { on = [ "m" ], run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
-    { on = [ "'" ], run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
-    { on = [ "b", "d" ], run = "plugin bookmarks delete", desc = "Delete a bookmark" },
-    { on = [ "b", "D" ], run = "plugin bookmarks delete_all", desc = "Delete all bookmarks" },
+  # Linemode
+  { on = ["F", "s"], run = "linemode size", desc = "Linemode: size" },
+  { on = ["F", "p"], run = "linemode permissions", desc = "Linemode: permissions" },
+  { on = ["F", "b"], run = "linemode btime", desc = "Linemode: btime" },
+  { on = ["F", "m"], run = "linemode mtime", desc = "Linemode: mtime" },
+  { on = ["F", "o"], run = "linemode owner", desc = "Linemode: owner" },
+  { on = ["F", "n"], run = "linemode none", desc = "Linemode: none" },
+  { on = ["F", "r"], run = "linemode rtime", desc = "Linemode: rtime" },
 
-	# Linemode
-	{ on = [ "F", "s" ], run = "linemode size",        desc = "Linemode: size" },
-	{ on = [ "F", "p" ], run = "linemode permissions", desc = "Linemode: permissions" },
-	{ on = [ "F", "b" ], run = "linemode btime",       desc = "Linemode: btime" },
-	{ on = [ "F", "m" ], run = "linemode mtime",       desc = "Linemode: mtime" },
-	{ on = [ "F", "o" ], run = "linemode owner",       desc = "Linemode: owner" },
-	{ on = [ "F", "n" ], run = "linemode none",        desc = "Linemode: none" },
-	{ on = [ "F", "r" ], run = "linemode rtime", desc = "Linemode: rtime" },
+  { on = "<C-p>", run = "tab_switch 1 --relative", desc = "Switch to next tab" },
+  { on = "<C-n>", run = "tab_switch -1 --relative", desc = "Switch to previous tab" },
 
-	{ on = "<C-p>", run = "tab_switch 1 --relative",  desc = "Switch to next tab" },
-	{ on = "<C-n>", run = "tab_switch -1 --relative", desc = "Switch to previous tab" },
-
-    # Copy to clipboard
-    { on  = "y", run = [ 'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ] },
+  # Copy to clipboard
+  { on = "y", run = [
+    'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
+    "yank"
+  ] },
 ]
-
-

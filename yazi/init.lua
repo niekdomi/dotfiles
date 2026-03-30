@@ -25,7 +25,6 @@ require("bookmarks"):setup({
 })
 require("full-border"):setup({ type = ui.Border.ROUNDED })
 require("git"):setup()
-require("recycle-bin"):setup()
 require("relative-motions"):setup({
 	show_numbers = "relative_absolute",
 	show_motion = true,
@@ -46,7 +45,6 @@ require("searchjump"):setup({
 	show_search_in_statusbar = false,
 	auto_exit_when_unmatch = true,
 	enable_capital_label = false,
-	search_patterns = { "hell[dk]d", "%d+.1080p", "第%d+集", "第%d+话", "%.E%d+", "S%d+E%d+" },
 })
 require("zoxide"):setup({ update_db = true })
 
