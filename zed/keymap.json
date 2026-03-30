@@ -87,8 +87,6 @@
       "space t l": "workspace::ToggleRightDock",
       // Toggle line wrapping
       "space t w": "editor::ToggleSoftWrap",
-      // Toggle outline
-      "space t o": "outline::Toggle",
       // Toggle Assistant
       "space t a": "agent::ToggleFocus",
       // Toggle inline git diff
@@ -129,11 +127,11 @@
         "task::Spawn",
         { "task_name": "Yazi", "reveal_target": "center" },
       ],
-      // Fuzzy finder
-      "space f c": [
-        "task::Spawn",
-        { "task_name": "Find in files", "reveal_target": "center" },
-      ],
+      // // Fuzzy finder
+      // "space f c": [
+      //   "task::Spawn",
+      //   { "task_name": "Find in files", "reveal_target": "center" },
+      // ],
     },
   },
   {
@@ -171,6 +169,11 @@
       "ctrl-shift-j": "workspace::ActivatePaneDown",
       "ctrl-shift-h": "workspace::ActivatePaneLeft",
       "ctrl-shift-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "bindings": {
+      "space": null, // Disable the default action vim::WrappingRight
     },
   },
 ]

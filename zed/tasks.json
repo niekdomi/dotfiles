@@ -6,9 +6,6 @@
     "hide": "always",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
-    "shell": {
-      "program": "/bin/fish",
-    },
   },
 
   // Yazi
@@ -18,20 +15,5 @@
     "hide": "always",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
-    "shell": {
-      "program": "/bin/fish",
-    },
-  },
-
-  // Fuzzy Finder
-  {
-    "label": "Find in files",
-    "command": "set -e BAT_THEME && zeditor \"$(tv text)\"",
-    "hide": "always",
-    "allow_concurrent_runs": false,
-    "use_new_terminal": true,
-    "shell": {
-      "program": "/bin/fish",
-    },
   },
 ]
