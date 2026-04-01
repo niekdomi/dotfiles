@@ -57,4 +57,7 @@ prepend_keymap = [
     'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
     "yank"
   ] },
+
+  # Drag and drop
+  { on = "<C-o>", run = "shell -- ripdrag %s -x 2>/dev/null &" }
 ]
