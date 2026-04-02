@@ -3,6 +3,7 @@ require("mason-tool-installer").setup({
 		"bashls",
 		"clang-format",
 		"clangd",
+		"codebook",
 		"css-lsp",
 		"eslint-lsp",
 		"gersemi",
@@ -33,6 +34,11 @@ require("mason-tool-installer").setup({
 vim.lsp.config.bashls = {
 	cmd = { "bash-language-server", "start" },
 	filetypes = { "bash", "sh", "zsh" },
+}
+
+vim.lsp.config.codebook = {
+	cmd = { "codebook-lsp", "serve" },
+	root_markers = { "codebook.toml", ".git" },
 }
 
 vim.lsp.config.clangd = {
@@ -302,4 +308,3 @@ vim.keymap.set("n", "<Leader>td", function()
 	diagnostic_states.enabled = not diagnostic_states.enabled
 	vim.diagnostic.config(get_active_config())
 end, { desc = "Toggle diagnostics" })
-
