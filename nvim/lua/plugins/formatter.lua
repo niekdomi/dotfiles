@@ -13,61 +13,23 @@ require("conform").setup({
 		jsonc = { "prettierd" },
 		lua = { "stylua" },
 		markdown = { "prettierd" },
-		python = { "ruff_format", "ruff_organize_imports" },
+		python = { lsp_format = "prefer" },
 		rust = { "rustfmt" },
 		svelte = { "prettierd" },
-		tex = { "latexindent" },
+		toml = { "tombi" },
 		typescript = { "prettierd" },
-		typst = { "typstyle" },
+		typst = { lsp_format = "prefer" },
 		yaml = { "prettierd" },
 	},
 	formatters = {
-		latexindent = {
-			-- install latexindent from package manager:
-			-- texlive-binextra perl-yaml-tiny perl-file-homedir
-			command = "latexindent",
-			args = function()
-				local yaml_file = vim.fn.getcwd() .. "/.latexindent.yaml"
-				if vim.fn.filereadable(yaml_file) == 1 then
-					return { "-m", "-rv", "-l" }
-				else
-					return { "-m", '-y=defaultIndent:"\t",noAdditionalIndent:multicols:1' }
-				end
-			end,
-		},
-		ruff = {
-			args = {
-				"-c",
-				"ruff\
-				check\
-				--select=I\
-				--fix\
-				--stdin-filename\
-				{buffer_path}\
-				| ruff format\
-				--stdin-filename\
-				{buffer_path}",
-			},
-		},
 		gersemi = {
-			command = "gersemi",
-			args = {
+			prepend_args = {
 				"--list-expansion=favour-expansion",
 				"--no-warn-about-unknown-commands",
-				"-", -- stdin
-			},
-		},
-		typstyle = {
-			command = "typstyle",
-			args = {
-				"--line-width",
-				"80",
-				"--wrap-text",
 			},
 		},
 	},
 	format_on_save = function(bufnr)
-		-- Disable with a global or buffer-local variable
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
 		end

@@ -1,5 +1,12 @@
+vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.filetype.add({
+	extension = {
+		json = "jsonc",
+	},
+})
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Options                                                  │
@@ -22,7 +29,6 @@ o.splitbelow = true
 o.splitright = true
 o.swapfile = false
 o.tabstop = 4
-o.termguicolors = true
 o.undofile = true
 o.wrap = false
 
@@ -35,7 +41,6 @@ o.mouse = "a"
 -- ╰──────────────────────────────────────────────────────────╯
 local map = vim.keymap.set
 
-vim.g.mapleader = " "
 -- Disable cutting
 map("n", "x", '"_x')
 map("n", "X", '"_X')
@@ -49,10 +54,6 @@ map("n", "<leader>w", "<cmd>w<CR>")
 map("n", "<leader>tw", "<cmd>set wrap!<CR>")
 map("n", "#", "@@")
 map({ "n", "v", "s", "x" }, "<leader>i", "~")
-
--- Sessions
-map("n", "<leader>fs", "<cmd>Telescope session-lens<CR>")
-map("n", "<leader>ss", "<cmd>AutoSession save<CR>")
 
 -- Telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
@@ -75,7 +76,7 @@ map("x", "X", function()
 end)
 
 -- Clear registers
-vim.keymap.set("n", "cr", function()
+map("n", "cr", function()
 	local regs = 'abcdefghijklmnopqrstuvwxyz0123456789/-"*+'
 	for i = 1, #regs do
 		local reg = regs:sub(i, i)
@@ -85,11 +86,9 @@ vim.keymap.set("n", "cr", function()
 end)
 
 -- LSP
-if vim.lsp.inlay_hint then
-	map("n", "<leader>tt", function()
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-	end)
-end
+map("n", "<leader>tt", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end)
 
 -- Git
 map("n", "gl", "<cmd>LazyGit<CR>")
@@ -102,17 +101,16 @@ map("n", "gh", function()
 end)
 
 -- Dial (Enhanced increment/decrement)
-vim.keymap.set("n", "<C-x>", function()
+map("n", "<C-x>", function()
 	require("dial.map").manipulate("decrement", "normal")
 end)
-vim.keymap.set("n", "<C-a>", function()
+map("n", "<C-a>", function()
 	require("dial.map").manipulate("increment", "normal")
 end)
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Autocommands                                             │
 -- ╰──────────────────────────────────────────────────────────╯
-
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
 	pattern = "*",
 	callback = function()
@@ -135,7 +133,7 @@ vim.pack.add({
 	{ src = "https://github.com/RRethy/vim-illuminate" },
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
-	{ src = "https://github.com/stevearc/dressing.nvim" }, -- NOTE: Archived but still relevant (rename and code actions ui)
+	{ src = "https://github.com/stevearc/dressing.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 	-- Telescope
@@ -164,7 +162,6 @@ vim.pack.add({
 	{ src = "https://github.com/monaqa/dial.nvim" },
 	{ src = "https://github.com/numToStr/Comment.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/rmagatti/auto-session" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 })
 
@@ -182,8 +179,6 @@ require("plugins.scroll")
 require("plugins.telescope")
 require("plugins.treesitter")
 
-require("auto-session").setup()
-
 require("better_escape").setup({
 	mappings = {
 		i = { j = { j = false, k = "<ESC>" } },
@@ -192,6 +187,11 @@ require("better_escape").setup({
 		s = { j = { k = false } }, -- selection mode (snippets) fix
 	},
 })
+
+-- Stub out "cmp" module for windsurf.nvim (expects nvim-cmp, but blink.cmp is used)
+package.preload["cmp"] = function()
+	return { event = { on = function() end }, register_source = function() end }
+end
 
 require("codeium").setup({
 	enable_cmp_source = false,
@@ -275,11 +275,7 @@ require("illuminate").configure({
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	automatic_enable = {
-		exclude = {
-			"eslint-lsp",
-		},
-	},
+	automatic_enable = true,
 })
 
 require("mini.icons").setup({
@@ -298,7 +294,16 @@ require("nvim-highlight-colors").setup({
 
 require("nvim-surround").setup()
 
-require("nvim-ts-autotag").setup()
+require("nvim-ts-autotag").setup({
+	opts = {
+		enable_close = true,
+		enable_rename = true,
+		enable_close_on_slash = false,
+	},
+	per_filetype = {
+		["rust"] = { enable_close = false, enable_rename = false },
+	},
+})
 
 require("render-markdown").setup({
 	code = {

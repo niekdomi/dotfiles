@@ -56,4 +56,3 @@ telescope.setup({
 	},
 })
 
--- telescope.load_extension("fzf")
