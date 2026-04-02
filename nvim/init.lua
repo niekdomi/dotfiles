@@ -61,7 +61,7 @@ map("n", "<leader>ft", "<cmd>Telescope colorscheme enable_preview=true<CR>")
 map("n", "<leader>fr", "<cmd>Telescope registers<CR>")
 map("n", "<leader>fm", "<cmd>Telescope marks<CR>")
 map("n", "<leader>fg", "<cmd>TodoTelescope<CR>")
-map("n", "<leader>to", "<cmd>Telescope lsp_document_symbols<CR>")
+map("n", "gO", "<cmd>Telescope lsp_document_symbols<CR>")
 
 -- Exchange
 map("n", "cx", function()
@@ -326,4 +326,3 @@ require("todo-comments").setup({
 require("yazi").setup({
 	open_for_directories = true,
 })
-

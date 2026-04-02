@@ -18,6 +18,7 @@ require("conform").setup({
 		svelte = { "prettierd" },
 		tex = { "latexindent" },
 		typescript = { "prettierd" },
+		typst = { "typstyle" },
 		yaml = { "prettierd" },
 	},
 	formatters = {
@@ -54,6 +55,14 @@ require("conform").setup({
 				"--list-expansion=favour-expansion",
 				"--no-warn-about-unknown-commands",
 				"-", -- stdin
+			},
+		},
+		typstyle = {
+			command = "typstyle",
+			args = {
+				"--line-width",
+				"80",
+				"--wrap-text",
 			},
 		},
 	},
