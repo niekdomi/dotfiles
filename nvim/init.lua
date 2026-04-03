@@ -109,16 +109,6 @@ map("n", "<C-a>", function()
 end)
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ Autocommands                                             │
--- ╰──────────────────────────────────────────────────────────╯
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
-	pattern = "*",
-	callback = function()
-		vim.bo.endofline = false
-	end,
-})
-
--- ╭──────────────────────────────────────────────────────────╮
 -- │ Plugins                                                  │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.pack.add({
@@ -331,3 +321,4 @@ require("todo-comments").setup({
 require("yazi").setup({
 	open_for_directories = true,
 })
+
