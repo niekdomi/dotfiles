@@ -1,43 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
 notARepository: "skip"
 disableStartupPopups: true
 promptToReturnFromSubprocess: false
-showCommandLog: false
-
 os:
   editPreset: "nvim"
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never --detect-dark-light always --side-by-side
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --detect-dark-light always --side-by-side
 gui:
+  showCommandLog: false
   nerdFontsVersion: "3"
   statusPanelView: allBranchesLog
-
   theme:
     activeBorderColor:
       - blue
       - bold
     inactiveBorderColor:
       - gray
+    searchingActiveBorderColor:
+      - yellow
     optionsTextColor:
       - blue
     selectedLineBgColor:
       - default
-    selectedRangeBgColor:
-      - black
-    cherryPickedCommitBgColor:
-      - darkgray
+    inactiveViewSelectedLineBgColor:
+      - bold
     cherryPickedCommitFgColor:
       - blue
+    cherryPickedCommitBgColor:
+      - darkgray
+    markedBaseCommitFgColor:
+      - blue
+    markedBaseCommitBgColor:
+      - yellow
     unstagedChangesColor:
       - red
     defaultFgColor:
       - default
-    searchingActiveBorderColor:
-      - yellow
-
 keybinding:
   universal:
     prevPage: <c-b>
