@@ -27,9 +27,9 @@ require("mason-tool-installer").setup({
 	},
 })
 
------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- LSP server configurations
------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 vim.lsp.config.bashls = {
 	cmd = { "bash-language-server", "start" },
@@ -138,6 +138,14 @@ vim.lsp.config.lua_ls = {
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" },
+			hint = {
+				arrayIndex = "Disable",
+				await = true,
+				enable = true,
+				paramName = "All",
+				paramType = true,
+				setType = true,
+			},
 			diagnostics = { globals = { "vim", "require" } },
 			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
 			telemetry = { enable = false },
@@ -215,17 +223,9 @@ vim.lsp.config.yamlls = {
 	filetypes = { "yaml", "yaml.docker-compose" },
 }
 
------------------------------------------------------------
--- Diagnostic signs
------------------------------------------------------------
-local sign_numhl = {}
-for _, type in ipairs({ "Error", "Warn", "Hint", "Info" }) do
-	sign_numhl[vim.diagnostic.severity[string.upper(type)]] = "DiagnosticSign" .. type
-end
-
------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- LSP keybindings
------------------------------------------------------------
+--------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
@@ -264,47 +264,66 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
------------------------------------------------------------
--- Diagnostic configuration
------------------------------------------------------------
-vim.diagnostic.config({
-	float = { border = "rounded", max_width = 70 },
-	signs = { text = {}, texthl = {}, numhl = sign_numhl },
-})
-
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "#E55353" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "#E0B644" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "#419BEF" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "#49B675" })
-
------------------------------------------------------------
--- Diagnostic toggle
------------------------------------------------------------
-local diagnostic_states = { enabled = true, inline = true }
-
-local diagnostic_configs = {
-	inline = { virtual_text = { prefix = "●" }, virtual_lines = false },
-	detailed = { virtual_text = false, virtual_lines = true },
-	disabled = { virtual_text = false, virtual_lines = false },
+--------------------------------------------------------------------------------
+-- Diagnostic configuration & Toggle Logic
+--------------------------------------------------------------------------------
+local icons = {
+	[vim.diagnostic.severity.ERROR] = "󰅚 ",
+	[vim.diagnostic.severity.WARN] = "󰀪 ",
+	[vim.diagnostic.severity.HINT] = "󰌶 ",
+	[vim.diagnostic.severity.INFO] = "󱩎 ",
 }
 
-local function get_active_config()
-	if not diagnostic_states.enabled then
-		return diagnostic_configs.disabled
-	end
-	return diagnostic_states.inline and diagnostic_configs.inline or diagnostic_configs.detailed
+local function set_diagnostic_highlights()
+	-- Get the foreground color from the standard diagnostic groups
+	local err_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticError" }).fg
+	local warn_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" }).fg
+	local hint_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticHint" }).fg
+	local info_fg = vim.api.nvim_get_hl(0, { name = "DiagnosticInfo" }).fg
+
+	-- Apply the color specifically to the special color (sp) attribute of the curl
+	vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = err_fg })
+	vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = warn_fg })
+	vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = hint_fg })
+	vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = info_fg })
 end
 
-vim.diagnostic.config(get_active_config())
+local state = { enabled = true, detailed = false }
 
+local function apply_diagnostics()
+	vim.diagnostic.config({
+		virtual_text = state.enabled and not state.detailed and {
+			prefix = "●",
+			severity = { min = vim.diagnostic.severity.WARN },
+		} or false,
+
+		virtual_lines = state.enabled and state.detailed and {
+			severity = { min = vim.diagnostic.severity.WARN },
+		} or false,
+
+		signs = state.enabled and { text = icons } or false,
+
+		float = { border = "rounded", max_width = 70 },
+	})
+end
+
+-- Toggle bindings
 vim.keymap.set("n", "<Leader>tl", function()
-	if diagnostic_states.enabled then
-		diagnostic_states.inline = not diagnostic_states.inline
-		vim.diagnostic.config(get_active_config())
+	if state.enabled then
+		state.detailed = not state.detailed
+		apply_diagnostics()
 	end
 end, { desc = "Toggle detailed diagnostics" })
 
 vim.keymap.set("n", "<Leader>td", function()
-	diagnostic_states.enabled = not diagnostic_states.enabled
-	vim.diagnostic.config(get_active_config())
+	state.enabled = not state.enabled
+	apply_diagnostics()
 end, { desc = "Toggle diagnostics" })
+
+-- Initial Load
+apply_diagnostics()
+set_diagnostic_highlights()
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = set_diagnostic_highlights,
+})
