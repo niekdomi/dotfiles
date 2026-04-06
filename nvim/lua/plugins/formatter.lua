@@ -1,5 +1,7 @@
 local function get_format_on_save(bufnr)
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+    end
     return { timeout_ms = 500, lsp_format = "fallback" }
 end
 

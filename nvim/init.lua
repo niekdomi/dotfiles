@@ -110,7 +110,7 @@ vim.pack.add({
     -- Git
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/kdheepak/lazygit.nvim" },
-    -- { src = "https://github.com/v3ceban/git-conflict.nvim" }, -- TODO: Unmaintained, but this is a working fork. Note: I should write my own plugin
+    { src = "https://github.com/niekdomi/conflict.nvim" },
 
     -- LSP, Auto-completion & Formatter
     { src = "https://github.com/mason-org/mason.nvim" },
@@ -173,10 +173,16 @@ require("better_escape").setup({
     },
 })
 
--- Stub out "cmp" module for windsurf.nvim (expects nvim-cmp, but blink.cmp is used)
+-- Stub out "cmp" module for windsurf.nvim & dressing.nvim (expects nvim-cmp, but blink.cmp is used)
 package.preload["cmp"] = function()
-    return { event = { on = function() end }, register_source = function() end }
+    local noop = function() end
+    return {
+        event = { on = noop },
+        register_source = noop,
+        setup = { buffer = noop },
+    }
 end
+
 require("codeium").setup({
     enable_cmp_source = false,
     virtual_text = {
@@ -196,6 +202,8 @@ require("codeium").setup({
 })
 
 require("Comment").setup()
+
+require("conflict").setup()
 
 local augend = require("dial.augend")
 require("dial.config").augends:register_group({
@@ -223,8 +231,6 @@ require("dial.config").augends:register_group({
 })
 
 require("dressing").setup()
-
--- require("git-conflict").setup() ---@diagnostic disable-line: missing-parameter
 
 require("gitsigns").setup({
     current_line_blame = true,

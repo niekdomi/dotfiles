@@ -3,7 +3,9 @@
 --------------------------------------------------------------------------------
 local function selectionCount()
     local mode = vim.api.nvim_get_mode().mode
-    if not mode:find("[vV\22]") then return "" end
+    if not mode:find("[vV\22]") then
+        return ""
+    end
 
     local anchor_line = vim.fn.line("v")
     local cursor_line = vim.fn.line(".")
@@ -27,7 +29,9 @@ local ok_codeium, codeium = pcall(require, "codeium.virtual_text")
 
 -- Check if Codeium plugin is loaded, fallback if not
 local function codeiumStatus()
-    if ok_codeium and codeium.status_string then return codeium.status_string() end
+    if ok_codeium and codeium.status_string then
+        return codeium.status_string()
+    end
     return ""
 end
 
@@ -35,7 +39,9 @@ end
 if ok_codeium and codeium.set_statusbar_refresh then
     codeium.set_statusbar_refresh(function()
         local ok_lualine, lualine = pcall(require, "lualine")
-        if ok_lualine then lualine.refresh() end
+        if ok_lualine then
+            lualine.refresh()
+        end
     end)
 end
 

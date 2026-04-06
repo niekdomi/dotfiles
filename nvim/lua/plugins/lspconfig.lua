@@ -38,7 +38,7 @@ vim.lsp.config.bashls = {
 
 vim.lsp.config.codebook = {
     cmd = { "codebook-lsp", "serve" },
-    root_markers = { "codebook.toml", ".git" },
+    root_markers = { "codebook.toml", ".codebook.toml", ".git" },
 }
 
 vim.lsp.config.clangd = {
@@ -239,49 +239,26 @@ vim.lsp.config.yamlls = {
 --------------------------------------------------------------------------------
 -- LSP keybindings
 --------------------------------------------------------------------------------
+
+local float_opts = { border = "rounded", max_width = 70 }
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        local bufnr = args.buf
-        local opts = { buffer = bufnr, silent = true }
-        local keymap = vim.keymap
+        local map = function(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, silent = true, desc = desc })
+        end
+        
+        -- stylua: ignore start
+        map("n", "grr", "<cmd>Telescope lsp_references<CR>", "Show references")
+        map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go definition")
+        map("n", "gD", "<cmd>tab split | Telescope lsp_definitions<CR>", "Definition in tab")
+        map("n", "<leader>D", "<cmd>Telescope diagnostics<CR>", "Show diagnostics")
+        map( "n", "<leader>dp", function() vim.diagnostic.jump({ count = -1, float = false }) end, "Prev diagnostic")
+        map( "n", "<leader>dn", function() vim.diagnostic.jump({ count = 1, float = false }) end, "Next diagnostic")
+        map("n", "K", function() vim.lsp.buf.hover(float_opts) end, "Show documentation")
+        map("i", "<C-s>", function() vim.lsp.buf.signature_help(float_opts) end, "Signature help")
+        -- stylua: ignore end
 
-        opts.desc = "Show references"
-        keymap.set("n", "grr", "<cmd>Telescope lsp_references<CR>", opts)
-
-        opts.desc = "Go definition"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-        opts.desc = "Go definition in new tab"
-        keymap.set("n", "gD", "<cmd>tab split | Telescope lsp_definitions<CR>", opts)
-
-        opts.desc = "Show diagnostics"
-        keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics<CR>", opts)
-
-        opts.desc = "Go to previous diagnostic"
-        keymap.set(
-            "n",
-            "<leader>dp",
-            function() vim.diagnostic.jump({ count = -1, float = false }) end,
-            opts
-        )
-
-        opts.desc = "Go to next diagnostic"
-        keymap.set(
-            "n",
-            "<leader>dn",
-            function() vim.diagnostic.jump({ count = 1, float = false }) end,
-            opts
-        )
-
-        opts.desc = "Show documentation"
-        keymap.set(
-            "n",
-            "K",
-            function() vim.lsp.buf.hover({ border = "rounded", max_width = 70 }) end,
-            opts
-        )
-
-        -- Disable LSP color highlighting (handled by nvim-highlight-colors)
         vim.lsp.document_color.enable(false)
     end,
 })
@@ -325,7 +302,7 @@ local function apply_diagnostics()
 
         signs = state.enabled and { text = icons } or false,
 
-        float = { border = "rounded", max_width = 70 },
+        float = float_opts,
     })
 end
 

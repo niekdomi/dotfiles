@@ -10,7 +10,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
         -- Disable for files over 1MB
         local ok, stats = pcall(vim.uv.fs_stat, ev.file)
-        if ok and stats and stats.size > 1024 * 1024 then return end
+        if ok and stats and stats.size > 1024 * 1024 then
+            return
+        end
 
         pcall(vim.treesitter.start)
         vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

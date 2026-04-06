@@ -1,0 +1,7 @@
+---
+CompileFlags:
+  Add: [-std=c++23]
+  Compiler: clang
+
+Documentation:
+  CommentFormat: Doxygen
