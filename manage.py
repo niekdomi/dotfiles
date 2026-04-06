@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Dotfiles manager — deploy and sync dotfiles to/from the system."""
+"""Dotfiles manager - deploy and sync dotfiles to/from the system."""
 
 import argparse
 import shutil
 import sys
-from datetime import datetime
+import zipfile
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final
 
@@ -74,10 +75,6 @@ def success(msg: str) -> None:
     _msg(GREEN, "SUCCESS", msg)
 
 
-def warning(msg: str) -> None:
-    _msg(YELLOW, "WARNING", msg)
-
-
 def error(msg: str) -> None:
     _msg(RED, "ERROR", msg, err=True)
 
@@ -87,14 +84,41 @@ def error(msg: str) -> None:
 # ------------------------------------------------------------------------------
 
 
+# Single zip that accumulates all backups for the current run.
+_backup_zip: Path | None = None
+
+
+def _get_backup_zip() -> Path:
+    """Return the backup zip path."""
+    global _backup_zip
+    if _backup_zip is None:
+        timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
+        _backup_zip = CONFIG_DIR / f"backup_{timestamp}.zip"
+    return _backup_zip
+
+
+def report_backup_zip() -> None:
+    """Print the backup zip path if any backups were made this run."""
+    if _backup_zip and _backup_zip.exists():
+        info(f"Backups written to: {CONFIG_DIR / _backup_zip.name}")
+
+
 def backup_if_exists(target: Path) -> None:
     """Move `target` aside with a timestamped suffix if it already exists."""
     if not target.exists():
         return
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup = target.parent / f"{target.name}.backup.{stamp}"
-    shutil.move(str(target), str(backup))
-    warning(f"Backed up: {target} → {backup.name}")
+    zip_path = _get_backup_zip()
+    with zipfile.ZipFile(zip_path, "a", compression=zipfile.ZIP_DEFLATED) as zf:
+        if target.is_dir():
+            for file in sorted(target.rglob("*")):
+                if file.is_file():
+                    zf.write(file, file.relative_to(target.parent))
+        else:
+            zf.write(target, target.name)
+    if target.is_dir():
+        shutil.rmtree(target)
+    else:
+        target.unlink()
 
 
 def smart_copy(
@@ -120,7 +144,10 @@ def smart_copy(
 
 
 def replace_dir(
-    src: Path, dest: Path, *, ignore_patterns: list[str] | None = None
+    src: Path,
+    dest: Path,
+    *,
+    ignore_patterns: list[str] | None = None,
 ) -> None:
     """Remove *dest* entirely, then copy *src* in its place."""
     if dest.exists():
@@ -148,6 +175,7 @@ def cmd_load(_args: argparse.Namespace) -> None:
             oss_dest = CONFIG_DIR / "Code - OSS"
 
             if not code_dest.exists() and not oss_dest.exists():
+                # Neither installed — default to Code
                 backup_if_exists(code_dest)
                 smart_copy(src, code_dest)
                 success("Loaded: Code → ~/.config/Code/")
@@ -181,6 +209,7 @@ def cmd_load(_args: argparse.Namespace) -> None:
         success(f"Loaded: {name}")
 
     success("Dotfiles loaded successfully!")
+    report_backup_zip()
 
 
 def cmd_update(_args: argparse.Namespace) -> None:
@@ -219,7 +248,9 @@ def cmd_update(_args: argparse.Namespace) -> None:
     yazi_src = CONFIG_DIR / "yazi"
     if yazi_src.exists():
         replace_dir(
-            yazi_src, DOTFILES_DIR / "yazi", ignore_patterns=["flavors", "plugins"]
+            yazi_src,
+            DOTFILES_DIR / "yazi",
+            ignore_patterns=["flavors", "plugins"],
         )
         success("Updated: yazi/ (filtered)")
 
@@ -245,6 +276,7 @@ def cmd_update(_args: argparse.Namespace) -> None:
             success(f"Updated: {name}")
 
     success("Dotfiles updated successfully!")
+    report_backup_zip()
 
 
 # ------------------------------------------------------------------------------
