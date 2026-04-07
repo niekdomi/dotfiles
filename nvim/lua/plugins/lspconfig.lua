@@ -7,7 +7,6 @@ require("mason-tool-installer").setup({
         "css-lsp",
         "emmylua_ls",
         "eslint-lsp",
-        "gersemi",
         "golangci-lint-langserver",
         "gopls",
         "html-lsp",
@@ -31,12 +30,17 @@ require("mason-tool-installer").setup({
 -- LSP server configurations
 --------------------------------------------------------------------------------
 
-vim.lsp.config.codebook = {
+vim.lsp.config("bashls", {
+    cmd = { "bash-language-server", "start" },
+    filetypes = { "sh" },
+})
+
+vim.lsp.config("codebook", {
     cmd = { "codebook-lsp", "serve" },
     root_markers = { "codebook.toml", ".codebook.toml", ".git" },
-}
+})
 
-vim.lsp.config.clangd = {
+vim.lsp.config("clangd", {
     cmd = { "clangd" },
     filetypes = { "c", "cpp", "cppm", "cuda", "cxx" },
     root_markers = { ".clangd", ".git" },
@@ -53,9 +57,9 @@ vim.lsp.config.clangd = {
             },
         },
     },
-}
+})
 
-vim.lsp.config.cssls = {
+vim.lsp.config("cssls", {
     cmd = { "vscode-css-language-server", "--stdio" },
     filetypes = { "css", "scss", "less" },
     settings = {
@@ -63,9 +67,9 @@ vim.lsp.config.cssls = {
         scss = { validate = true },
         less = { validate = true },
     },
-}
+})
 
-vim.lsp.config.emmylua_ls = {
+vim.lsp.config("emmylua_ls", {
     cmd = { "emmylua_ls" },
     filetypes = { "lua" },
     root_markers = { ".emmyrc.json", ".luarc.json", ".git" },
@@ -74,9 +78,9 @@ vim.lsp.config.emmylua_ls = {
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
         },
     },
-}
+})
 
-vim.lsp.config.eslint = {
+vim.lsp.config("eslint", {
     cmd = { "vscode-eslint-language-server", "--stdio" },
     filetypes = {
         "javascript",
@@ -108,15 +112,15 @@ vim.lsp.config.eslint = {
             })
         end
     end,
-}
+})
 
-vim.lsp.config.golangci_lint_ls = {
+vim.lsp.config("golangci_lint_ls", {
     cmd = { "golangci-lint-langserver" },
     filetypes = { "go", "gomod" },
     root_markers = { ".golangci.yml", ".golangci.yaml", "go.mod", ".git" },
-}
+})
 
-vim.lsp.config.gopls = {
+vim.lsp.config("gopls", {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork" },
     root_markers = { "go.mod", ".git" },
@@ -138,23 +142,29 @@ vim.lsp.config.gopls = {
             usePlaceholders = true,
         },
     },
-}
+})
 
-vim.lsp.config.html = {
+vim.lsp.config("html", {
     cmd = { "vscode-html-language-server", "--stdio" },
     filetypes = { "html" },
-}
+})
 
-vim.lsp.config.jsonls = {
+vim.lsp.config("jsonls", {
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" },
-}
+})
 
-vim.lsp.config.ruff = {
+vim.lsp.config("ruff", {
     cmd = { "ruff", "server" },
     filetypes = { "python" },
     root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
-}
+})
+
+vim.lsp.config("neocmake", {
+    cmd = { "neocmakelsp", "stdio" },  -- "stdio" subcommand is required
+    filetypes = { "cmake" },
+    root_markers = { "CMakeLists.txt", ".git" },
+})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.py",
@@ -175,19 +185,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
-vim.lsp.config.rust_analyzer = {
+vim.lsp.config("rust_analyzer", {
     cmd = { "rust-analyzer" },
     filetypes = { "rust" },
     root_markers = { "Cargo.toml", ".git" },
-}
+})
 
-vim.lsp.config.svelte = {
+vim.lsp.config("svelte", {
     cmd = { "svelteserver", "--stdio" },
     filetypes = { "svelte" },
     root_markers = { "package.json", ".git" },
-}
+})
 
-vim.lsp.config.tinymist = {
+vim.lsp.config("tinymist", {
     cmd = { "tinymist" },
     filetypes = { "typst" },
     root_markers = { ".git" },
@@ -196,29 +206,29 @@ vim.lsp.config.tinymist = {
         formatterPrintWidth = 80,
         formatterProseWrap = true,
     },
-}
+})
 
-vim.lsp.config.tombi = {
+vim.lsp.config("tombi", {
     cmd = { "tombi", "lsp" },
     filetypes = { "toml" },
-}
+})
 
-vim.lsp.config.ts_ls = {
+vim.lsp.config("ts_ls", {
     cmd = { "typescript-language-server", "--stdio" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
-}
+})
 
-vim.lsp.config.ty = {
+vim.lsp.config("ty", {
     cmd = { "ty", "server" },
     filetypes = { "python" },
     root_markers = { "pyproject.toml", ".git" },
-}
+})
 
-vim.lsp.config.yamlls = {
+vim.lsp.config("yamlls", {
     cmd = { "yaml-language-server", "--stdio" },
     filetypes = { "yaml", "yaml.docker-compose" },
-}
+})
 
 --------------------------------------------------------------------------------
 -- LSP keybindings
