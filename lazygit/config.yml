@@ -8,9 +8,9 @@ os:
 git:
   pagers:
     - colorArg: always
-      # Lazygit has a bug that it will always pass dark to the pager. With
-      # `--light` this can be overwritten. Tracking issue:  https://github.com/jesseduffield/lazygit/issues/4550
-      pager: delta --paging=never --detect-dark-light always --side-by-side
+      # Lazygit has a bug that it will always pass dark to the pager. This bash script is a workaround.
+      # Tracking issue:  https://github.com/jesseduffield/lazygit/issues/4550
+      pager: ~/.config/lazygit/dark-light.sh --paging=never --side-by-side --syntax-theme=ansi
 gui:
   showCommandLog: false
   nerdFontsVersion: "3"
