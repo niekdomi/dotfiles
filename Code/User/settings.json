@@ -5,6 +5,7 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.list.smoothScrolling": true,
   "workbench.navigationControl.enabled": false,
+  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.preferredLightColorTheme": "Catppuccin Latte",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.indent": 20,
@@ -26,13 +27,13 @@
           "storage.modifier", //static keyword
           "storage.type.class.js", //class keyword
           "keyword", //import, export, return…
-          "text" // text
+          "text", // text
         ],
         "settings": {
-          "fontStyle": "italic"
-        }
-      }
-    ]
+          "fontStyle": "italic",
+        },
+      },
+    ],
   },
   "editor.inlayHints.enabled": "off",
   "editor.lineNumbers": "relative",
@@ -43,15 +44,13 @@
   "editor.smoothScrolling": true,
   "editor.stickyScroll.enabled": false,
   "editor.suggest.showWords": false,
-
   "workbench.colorCustomizations": {
     // Change color of debug inline values
-    "editor.inlineValuesBackground": "#313244" // Dark
+    "editor.inlineValuesBackground": "#313244", // Dark
     // "editor.inlineValuesBackground": "#dce0e8" // Light
   },
 
   // OTHER
-  "chat.commandCenter.enabled": false,
   "debug.inlineValues": "on",
   "git.blame.editorDecoration.enabled": true,
   "git.blame.editorDecoration.template": "${authorName} - ${hashShort}",
@@ -61,40 +60,24 @@
   "window.autoDetectColorScheme": true,
   "window.customTitleBarVisibility": "auto",
   "window.titleBarStyle": "custom", // Use the default VS Code title bar
-
   // Formatter
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "[c]": {
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
-    // "editor.defaultFormatter": "ms-vscode.cpptools"
-    "editor.formatOnSave": true
   },
   "[cpp]": {
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
-    // "editor.defaultFormatter": "ms-vscode.cpptools"
-    "editor.formatOnSave": true
   },
-  "[java]": {
-    "editor.defaultFormatter": "redhat.java"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[latex]": {
-    "editor.defaultFormatter": "James-Yu.latex-workshop",
-    "editor.formatOnSave": true
-  },
-  "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
-  },
+  "[java]": { "editor.defaultFormatter": "redhat.java" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[latex]": { "editor.defaultFormatter": "James-Yu.latex-workshop" },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit",
     },
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
 
   // *** CMake/TestMate ***
@@ -102,9 +85,9 @@
     {
       "pattern": "{build,Build,BUILD,out,Out,OUT}/**/*{test,Test,TEST}*",
       "runTask": {
-        "before": ["build"]
-      }
-    }
+        "before": ["build"],
+      },
+    },
   ],
   "testMate.cpp.discovery.loadOnStartup": true,
   "testMate.cpp.debug.configTemplate": {
@@ -114,7 +97,7 @@
     "cwd": "${cwd}",
     "env": "${envObj}",
     "environment": "${envObjArray}",
-    "sourceFileMap": "${sourceFileMapObj}"
+    "sourceFileMap": "${sourceFileMapObj}",
   },
 
   // *** Scroll percentage ***
@@ -130,20 +113,20 @@
     "icon": "check",
     "type": "text",
     "foreground": "#89dcec",
-    "iconColour": "#89dcec"
+    "iconColour": "#89dcec",
   },
   "todo-tree.highlights.customHighlight": {
     "TODO": {
       "icon": "check",
       "iconColour": "#89dcec",
-      "gutterIcon": true
+      "gutterIcon": true,
     },
     "FIXME": {
       "icon": "bug",
       "iconColour": "#f38ba9",
       "foreground": "#f38ba9",
-      "gutterIcon": true
-    }
+      "gutterIcon": true,
+    },
   },
 
   // *** GO ***
@@ -151,17 +134,13 @@
   "go.lintFlags": ["--path-mode=abs", "--fast-only"],
   "go.formatTool": "custom",
   "go.alternateTools": {
-    "customFormatter": "golangci-lint"
+    "customFormatter": "golangci-lint",
   },
   "go.formatFlags": ["fmt", "--stdin"],
   "go.toolsManagement.autoUpdate": true,
   "[go]": {
-    "editor.defaultFormatter": "golang.go"
+    "editor.defaultFormatter": "golang.go",
   },
-
-  // *** PYLANCE ***
-  "python.analysis.inlayHints.functionReturnTypes": true,
-  "python.analysis.typeCheckingMode": "standard",
 
   // *** LATEX ***
   "latex-workshop.intellisense.unimathsymbols.enabled": true,
@@ -176,7 +155,7 @@
     // "-l=/path/to/file",
     "-l",
     "-m",
-    "-rv"
+    "-rv",
   ],
   "latex-workshop.latex.recipe.default": "tectonic",
   "latex-workshop.latex.rootFile.indicator": "\\begin{document}",
@@ -193,7 +172,7 @@
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
+    "vscodevim.vim": 1,
   },
 
   // ╭──────────────────────────────────────────────────────────╮
@@ -201,27 +180,27 @@
   // ╰──────────────────────────────────────────────────────────╯
   "vim.insertModeKeyBindings": [{ "before": ["j", "k"], "after": ["<Esc>"] }],
   "vim.visualModeKeyBindings": [{ "before": ["leader", "i"], "after": ["~"] }],
+
   "vim.normalModeKeyBindingsNonRecursive": [
     // Flash.nvim
     { "before": ["s"], "commands": ["flash-vscode.start"] },
     { "before": ["<BS>"], "commands": ["flash-vscode.backspace"] },
 
     { "before": ["K"], "after": ["g", "h"] }, // Show definition
-
     { "before": ["C-y"], "after": ["C-y", "C-y", "C-y"] },
-    { "before": ["C-e"], "after": ["C-e", "C-e", "C-e"] }
+    { "before": ["C-e"], "after": ["C-e", "C-e", "C-e"] },
   ],
   "vim.normalModeKeyBindings": [
     { "before": ["Y"], "after": ["y", "$"] }, // Use neovim-like yank
     {
       // New line below
       "before": ["leader", "o"],
-      "commands": ["editor.action.insertLineAfter"]
+      "commands": ["editor.action.insertLineAfter"],
     },
     {
       // New line above
       "before": ["leader", "O"],
-      "commands": ["editor.action.insertLineBefore"]
+      "commands": ["editor.action.insertLineBefore"],
     },
     { "before": ["leader", "i"], "after": ["~"] }, // Toggle case
     { "before": ["leader", "n", "h"], "commands": [":nohl"] }, // Reset highlighting
@@ -230,19 +209,11 @@
     {
       // Toggle breakpoint
       "before": ["leader", "d"],
-      "commands": ["editor.debug.action.toggleBreakpoint"]
+      "commands": ["editor.debug.action.toggleBreakpoint"],
     },
     { "before": ["#"], "after": ["@", "@"] }, // Repat last macro
-    {
-      // Toggle File Explorer
-      "before": ["leader", "e"],
-      "commands": ["yazi-vscode.toggle"]
-    },
-    {
-      // Toggle lazygit
-      "before": ["g", "l"],
-      "commands": ["lazygit-vscode.toggle"]
-    },
+    { "before": ["leader", "e"], "commands": ["yazi-vscode.toggle"] }, // Toggle File Explorer
+    { "before": ["g", "l"], "commands": ["lazygit-vscode.toggle"] }, // Toggle lazygit
 
     // ╭──────────────────────────────────────────────────────────╮
     // │ LSP shorcuts                                             │
@@ -259,7 +230,7 @@
     {
       // Reopen closed tab
       "before": ["leader", "u"],
-      "commands": ["workbench.action.reopenClosedEditor"]
+      "commands": ["workbench.action.reopenClosedEditor"],
     },
 
     // ╭──────────────────────────────────────────────────────────╮
@@ -268,17 +239,17 @@
     {
       // Toggle bottom panel
       "before": ["leader", "t", "j"],
-      "commands": ["workbench.action.togglePanel"]
+      "commands": ["workbench.action.togglePanel"],
     },
     {
       // Toggle left sidebar
       "before": ["leader", "t", "h"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "commands": ["workbench.action.toggleSidebarVisibility"],
     },
     {
       // Toggle right sidebar
       "before": ["leader", "t", "l"],
-      "commands": ["workbench.action.toggleAuxiliaryBar"]
+      "commands": ["workbench.action.toggleAuxiliaryBar"],
     },
 
     // ╭──────────────────────────────────────────────────────────╮
@@ -287,41 +258,40 @@
     {
       // Show command palette
       "before": ["leader", ":"],
-      "commands": ["workbench.action.showCommands"]
+      "commands": ["workbench.action.showCommands"],
     },
     {
       // Find files
       "before": ["leader", "f", "f"],
-      "commands": ["workbench.action.quickOpen"]
+      "commands": ["workbench.action.quickOpen"],
     },
     {
       // Global search
       "before": ["leader", "f", "c"],
-      "commands": ["workbench.action.findInFiles"]
+      "commands": ["workbench.action.findInFiles"],
     },
     {
       // Change color scheme
       "before": ["leader", "f", "t"],
-      "commands": ["workbench.action.selectTheme"]
+      "commands": ["workbench.action.selectTheme"],
     },
     {
       // Open register
       "before": ["leader", "f", "r"],
-      "after": [":", "r", "e", "g", "enter"]
+      "after": [":", "r", "e", "g", "enter"],
     },
     {
       // Open marks
       "before": ["leader", "f", "m"],
-      "after": [":", "m", "a", "r", "k", "s", "enter"]
+      "after": [":", "m", "a", "r", "k", "s", "enter"],
     },
     {
       // Switch tabs
       "before": ["leader", "s", "t"],
       "commands": [
-        "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
-      ]
+        "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+      ],
     },
-
     // ╭──────────────────────────────────────────────────────────╮
     // │ Disable cutting                                          │
     // ╰──────────────────────────────────────────────────────────╯
@@ -329,7 +299,7 @@
     {
       // "before": ["x"],
       // "after": [ "\"", "_", "x" ]
-    }
+    },
   ],
   "editor.bracketPairColorization.enabled": false,
   "editor.experimental.preferTreeSitter.css": true,
@@ -350,5 +320,6 @@
   "breadcrumbs.enabled": false,
   "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
   "debug.showVariableTypes": true,
-  "chat.viewSessions.orientation": "stacked"
+  "chat.viewSessions.orientation": "stacked",
+  "markdown.preview.doubleClickToSwitchToEditor": false,
 }
