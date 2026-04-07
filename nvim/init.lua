@@ -149,11 +149,11 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
 })
-
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.cmd("colorscheme catppuccin-mocha")
+require("theme")
 
 require("plugins.cmp")
 require("plugins.flash")

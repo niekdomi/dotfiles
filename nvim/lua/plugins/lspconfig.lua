@@ -5,13 +5,13 @@ require("mason-tool-installer").setup({
         "clangd",
         "codebook",
         "css-lsp",
+        "emmylua_ls",
         "eslint-lsp",
         "gersemi",
         "golangci-lint-langserver",
         "gopls",
         "html-lsp",
         "json-lsp",
-        "lua_ls",
         "neocmakelsp",
         "prettierd",
         "ruff",
@@ -30,11 +30,6 @@ require("mason-tool-installer").setup({
 --------------------------------------------------------------------------------
 -- LSP server configurations
 --------------------------------------------------------------------------------
-
-vim.lsp.config.bashls = {
-    cmd = { "bash-language-server", "start" },
-    filetypes = { "bash", "sh", "zsh" },
-}
 
 vim.lsp.config.codebook = {
     cmd = { "codebook-lsp", "serve" },
@@ -67,6 +62,17 @@ vim.lsp.config.cssls = {
         css = { validate = true },
         scss = { validate = true },
         less = { validate = true },
+    },
+}
+
+vim.lsp.config.emmylua_ls = {
+    cmd = { "emmylua_ls" },
+    filetypes = { "lua" },
+    root_markers = { ".emmyrc.json", ".luarc.json", ".git" },
+    settings = {
+        emmylua = {
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        },
     },
 }
 
@@ -142,28 +148,6 @@ vim.lsp.config.html = {
 vim.lsp.config.jsonls = {
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" },
-}
-
-vim.lsp.config.lua_ls = {
-    cmd = { "lua-language-server" },
-    filetypes = { "lua" },
-    root_markers = { ".luarc.json", ".luarc.jsonc", ".git" },
-    settings = {
-        Lua = {
-            runtime = { version = "LuaJIT" },
-            hint = {
-                arrayIndex = "Disable",
-                await = true,
-                enable = true,
-                paramName = "All",
-                paramType = true,
-                setType = true,
-            },
-            diagnostics = { globals = { "vim", "require" } },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-            telemetry = { enable = false },
-        },
-    },
 }
 
 vim.lsp.config.ruff = {

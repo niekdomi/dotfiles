@@ -13,7 +13,7 @@
       "src": "https://github.com/saghen/blink.cmp"
     },
     "conflict.nvim": {
-      "rev": "ed1234053defc543ea185069ceb32606dcbced05",
+      "rev": "94f0132f95dbefbf20a666fa21eb0544349e0868",
       "src": "https://github.com/niekdomi/conflict.nvim"
     },
     "conform.nvim": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/folke/flash.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "db486b42299b2e3f5831809617af21becf268a39",
+      "rev": "0d797daee85366bc242580e352a4f62d67557b84",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "indent-blankline.nvim": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "rev": "b03fb0f20bc1d43daf558cda981a2be22e73ac42",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/karb94/neoscroll.nvim"
     },
     "nvim": {
-      "rev": "df2a1f9f3392d688397e945544a30aec8fc9b4c7",
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-autopairs": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
+      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-ts-autotag": {
@@ -101,7 +101,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "687de727de91a63b0bff9cff4e71d73f9d40fa77",
+      "rev": "4ae2f2e8e8c66d070f33cfb57cb6f867e3baf5d9",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "substitute.nvim": {
@@ -109,7 +109,7 @@
       "src": "https://github.com/gbprod/substitute.nvim"
     },
     "telescope.nvim": {
-      "rev": "cfb85dcf7f822b79224e9e6aef9e8c794211b20b",
+      "rev": "7ef4d6dccb78ee71e552bbd866176762ad328afa",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "todo-comments.nvim": {
@@ -125,7 +125,7 @@
       "src": "https://github.com/Exafunction/windsurf.nvim"
     },
     "yazi.nvim": {
-      "rev": "ef7b94dd40af5267f288bc7441dca6cda9d222a7",
+      "rev": "78f7dc1ff5fef3ea60897ec356681f9aa0ed53d8",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
