@@ -6,6 +6,9 @@ local ts = require("nvim-treesitter")
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(ev)
         local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+        if not require("nvim-treesitter.parsers")[lang] then
+            return
+        end
         pcall(ts.install, lang)
 
         -- Disable for files over 1MB

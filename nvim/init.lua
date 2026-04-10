@@ -47,23 +47,24 @@ map("n", "x", "\"_x")
 map("n", "X", "\"_X")
 
 -- Editor / Editing
-map("n", "<leader>nh", "<cmd>nohl<CR>")
+map("n", "<leader>nh", "<cmd>nohl<cr>")
 map("n", "<leader>o", "o<Esc>")
 map("n", "<leader>O", "O<Esc>")
 map("n", "<leader>e", "<cmd>Yazi<cr>")
-map("n", "<leader>w", "<cmd>w<CR>")
-map("n", "<leader>tw", "<cmd>set wrap!<CR>")
+map("n", "<leader>w", "<cmd>w<cr>")
+map("n", "<leader>tw", "<cmd>set wrap!<cr>")
 map("n", "#", "@@")
 map({ "n", "v", "s", "x" }, "<leader>i", "~")
 
 -- Telescope
-map("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
-map("n", "<leader>fc", "<cmd>Telescope live_grep<CR>")
-map("n", "<leader>ft", "<cmd>Telescope colorscheme enable_preview=true<CR>")
-map("n", "<leader>fr", "<cmd>Telescope registers<CR>")
-map("n", "<leader>fm", "<cmd>Telescope marks<CR>")
-map("n", "<leader>fg", "<cmd>TodoTelescope<CR>")
-map("n", "gO", "<cmd>Telescope lsp_document_symbols<CR>")
+map("n", "<leader>fC", "<cmd>Telescope git_conflict<cr>")
+map("n", "<leader>fc", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fg", "<cmd>TodoTelescope<cr>")
+map("n", "<leader>fm", "<cmd>Telescope marks<cr>")
+map("n", "<leader>fr", "<cmd>Telescope registers<cr>")
+map("n", "<leader>ft", "<cmd>Telescope colorscheme enable_preview=true<cr>")
+map("n", "gO", "<cmd>Telescope lsp_document_symbols<cr>")
 
 -- Exchange
 map("n", "cx", function() require("substitute.exchange").operator() end)
@@ -90,8 +91,8 @@ map(
 )
 
 -- Git
-map("n", "gl", "<cmd>LazyGit<CR>")
-map("n", "gB", "<cmd>Gitsigns blame_line<CR>")
+map("n", "gl", "<cmd>LazyGit<cr>")
+map("n", "gB", "<cmd>Gitsigns blame_line<cr>")
 
 map("n", "gh", function()
     vim.cmd("Gitsigns toggle_word_diff")
@@ -203,7 +204,9 @@ require("codeium").setup({
 
 require("Comment").setup()
 
-require("conflict").setup()
+require("conflict").setup({
+    show_actions = false,
+})
 
 local augend = require("dial.augend")
 require("dial.config").augends:register_group({
