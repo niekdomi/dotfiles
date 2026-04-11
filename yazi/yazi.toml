@@ -27,3 +27,12 @@ sort_by = "natural"
 [preview]
 max_width = 1000
 max_height = 2000
+
+[opener]
+zathura = [{ run = 'zathura "%s"', orphan = true, desc = "Zathura" }]
+papers = [{ run = 'papers "%s"', orphan = true, desc = "Papers" }]
+
+[open]
+prepend_rules = [
+  { mime = "application/pdf", use = ["zathura", "papers", "reveal"] },
+]
