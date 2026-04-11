@@ -8,16 +8,31 @@ local function selectionCount()
     end
 
     local anchor_line = vim.fn.line("v")
+    local anchor_col = vim.fn.col("v")
     local cursor_line = vim.fn.line(".")
+    local cursor_col = vim.fn.col(".")
 
     local start_line = math.min(anchor_line, cursor_line)
     local end_line = math.max(anchor_line, cursor_line)
-
-    local start_byte = vim.fn.line2byte(start_line)
-    local end_byte = vim.fn.line2byte(end_line + 1)
-
     local line_count = end_line - start_line + 1
-    local char_count = end_byte - start_byte
+
+    local char_count
+    if mode == "V" then -- Visual line
+        local start_byte = vim.fn.line2byte(start_line)
+        local end_byte = vim.fn.line2byte(end_line + 1)
+        char_count = end_byte - start_byte
+    elseif mode == "\22" then -- Visual block
+        local start_col = math.min(anchor_col, cursor_col)
+        local end_col = math.max(anchor_col, cursor_col)
+        char_count = (end_col - start_col + 1) * line_count
+    else
+        local start_byte = vim.fn.line2byte(anchor_line) + anchor_col - 1
+        local end_byte = vim.fn.line2byte(cursor_line) + cursor_col - 1
+        if start_byte > end_byte then
+            start_byte, end_byte = end_byte, start_byte
+        end
+        char_count = end_byte - start_byte + 1
+    end
 
     return string.format("%dLn : %dC", line_count, char_count)
 end

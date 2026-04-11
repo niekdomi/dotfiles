@@ -161,7 +161,7 @@ vim.lsp.config("ruff", {
 })
 
 vim.lsp.config("neocmake", {
-    cmd = { "neocmakelsp", "stdio" },  -- "stdio" subcommand is required
+    cmd = { "neocmakelsp", "stdio" },
     filetypes = { "cmake" },
     root_markers = { "CMakeLists.txt", ".git" },
 })
@@ -228,6 +228,11 @@ vim.lsp.config("ty", {
 vim.lsp.config("yamlls", {
     cmd = { "yaml-language-server", "--stdio" },
     filetypes = { "yaml", "yaml.docker-compose" },
+})
+
+vim.lsp.config("zls", {
+    cmd = { "zls" },
+    filetypes = { "zig" },
 })
 
 --------------------------------------------------------------------------------
