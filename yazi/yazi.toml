@@ -29,9 +29,9 @@ max_width = 1000
 max_height = 2000
 
 [opener]
-zathura = [{ run = 'zathura "%s"', orphan = true, desc = "Zathura" }]
-papers = [{ run = 'papers "%s"', orphan = true, desc = "Papers" }]
-firefox = [{ run = 'firefox "%s"', orphan = true, desc = "Firefox" }]
+zathura = [{ run = "zathura %s", orphan = true, desc = "Zathura" }]
+papers = [{ run = "papers %s", orphan = true, desc = "Papers" }]
+firefox = [{ run = "firefox %s", orphan = true, desc = "Firefox" }]
 
 [open]
 prepend_rules = [
