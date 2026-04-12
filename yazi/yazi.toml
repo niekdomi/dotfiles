@@ -31,8 +31,9 @@ max_height = 2000
 [opener]
 zathura = [{ run = 'zathura "%s"', orphan = true, desc = "Zathura" }]
 papers = [{ run = 'papers "%s"', orphan = true, desc = "Papers" }]
+firefox = [{ run = 'firefox "%s"', orphan = true, desc = "Firefox" }]
 
 [open]
 prepend_rules = [
-  { mime = "application/pdf", use = ["zathura", "papers", "reveal"] },
+  { mime = "application/pdf", use = ["zathura", "papers", "firefox", "reveal"] },
 ]
