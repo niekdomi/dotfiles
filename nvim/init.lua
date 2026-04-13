@@ -2,6 +2,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.filetype.add({
     extension = {
@@ -71,6 +72,10 @@ map("n", "gO", "<cmd>Telescope lsp_document_symbols<cr>")
 map("n", "<leader>fp", "<cmd>AutoSession search<cr>")
 map("n", "<leader>fs", "<cmd>AutoSession save<cr>")
 
+-- grug-far
+vim.keymap.set("n", "g/", function() require("grug-far").open() end)
+vim.keymap.set("v", "g/", function() require("grug-far").with_visual_selection() end)
+
 -- Exchange
 map("n", "cx", function() require("substitute.exchange").operator() end)
 map("n", "cxx", function() require("substitute.exchange").line() end)
@@ -114,48 +119,51 @@ map("n", "<C-a>", function() require("dial.map").manipulate("increment", "normal
 -- ╰──────────────────────────────────────────────────────────╯
 vim.pack.add({
     -- Git
-    { src = "lewis6991/gitsigns.nvim" },
-    { src = "kdheepak/lazygit.nvim" },
-    { src = "niekdomi/conflict.nvim" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/kdheepak/lazygit.nvim" },
+    { src = "https://github.com/niekdomi/conflict.nvim" },
 
     -- LSP, Auto-completion & Formatter
-    { src = "mason-org/mason.nvim" },
-    { src = "mason-org/mason-lspconfig.nvim" },
-    { src = "RRethy/vim-illuminate" },
-    { src = "saghen/blink.cmp" },
-    { src = "stevearc/conform.nvim" },
-    { src = "stevearc/dressing.nvim" },
-    { src = "WhoIsSethDaniel/mason-tool-installer.nvim" },
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+    { src = "https://github.com/RRethy/vim-illuminate" },
+    { src = "https://github.com/saghen/blink.cmp" },
+    { src = "https://github.com/stevearc/conform.nvim" },
+    { src = "https://github.com/stevearc/dressing.nvim" },
+    { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 
     -- Telescope
-    { src = "nvim-lua/plenary.nvim" },
-    { src = "nvim-mini/mini.icons" },
-    { src = "nvim-telescope/telescope.nvim" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/nvim-mini/mini.icons" },
+    { src = "https://github.com/nvim-telescope/telescope.nvim" },
+
+    { src = "https://github.com/MagicDuck/grug-far.nvim" },
 
     -- Treesitter
-    { src = "nvim-treesitter/nvim-treesitter" },
-    { src = "nvim-treesitter/nvim-treesitter-textobjects" },
-    { src = "windwp/nvim-ts-autotag" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+    { src = "https://github.com/windwp/nvim-ts-autotag" },
 
     -- Others
-    { src = "Exafunction/windsurf.nvim" },
-    { src = "MeanderingProgrammer/render-markdown.nvim" },
-    { src = "brenoprata10/nvim-highlight-colors" },
-    { src = "catppuccin/nvim" },
-    { src = "folke/flash.nvim" },
-    { src = "folke/todo-comments.nvim" },
-    { src = "gbprod/substitute.nvim" },
-    { src = "karb94/neoscroll.nvim" },
-    { src = "kylechui/nvim-surround" },
-    { src = "lukas-reineke/indent-blankline.nvim" },
-    { src = "max397574/better-escape.nvim" },
-    { src = "mikavilpas/yazi.nvim" },
-    { src = "monaqa/dial.nvim" },
-    { src = "numToStr/Comment.nvim" },
-    { src = "nvim-lualine/lualine.nvim" },
-    { src = "rmagatti/auto-session" },
-    { src = "windwp/nvim-autopairs" },
+    { src = "https://github.com/Exafunction/windsurf.nvim" },
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+    { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+    { src = "https://github.com/catppuccin/nvim" },
+    { src = "https://github.com/folke/flash.nvim" },
+    { src = "https://github.com/folke/todo-comments.nvim" },
+    { src = "https://github.com/gbprod/substitute.nvim" },
+    { src = "https://github.com/karb94/neoscroll.nvim" },
+    { src = "https://github.com/kylechui/nvim-surround" },
+    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
+    { src = "https://github.com/max397574/better-escape.nvim" },
+    { src = "https://github.com/mikavilpas/yazi.nvim" },
+    { src = "https://github.com/monaqa/dial.nvim" },
+    { src = "https://github.com/numToStr/Comment.nvim" },
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
+    { src = "https://github.com/rmagatti/auto-session" },
+    { src = "https://github.com/windwp/nvim-autopairs" },
 })
+
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -257,6 +265,14 @@ require("gitsigns").setup({
     current_line_blame_formatter = "<author> - <summary>",
     preview_config = { border = "rounded" },
     gh = true,
+})
+
+require("grug-far").setup({
+    engines = {
+        ripgrep = {
+            extraArgs = "--multiline -F",
+        },
+    },
 })
 
 require("ibl").setup({
