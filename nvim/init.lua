@@ -137,8 +137,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-mini/mini.icons" },
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
 
-    { src = "https://github.com/MagicDuck/grug-far.nvim" },
-
     -- Treesitter
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
@@ -146,6 +144,7 @@ vim.pack.add({
 
     -- Others
     { src = "https://github.com/Exafunction/windsurf.nvim" },
+    { src = "https://github.com/MagicDuck/grug-far.nvim" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
     { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
     { src = "https://github.com/catppuccin/nvim" },
