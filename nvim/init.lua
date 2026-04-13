@@ -58,6 +58,7 @@ map({ "n", "v", "s", "x" }, "<leader>i", "~")
 
 -- Telescope
 map("n", "<leader>fC", "<cmd>Telescope git_conflict<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>")
 map("n", "<leader>fc", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>fg", "<cmd>TodoTelescope<cr>")
@@ -65,6 +66,10 @@ map("n", "<leader>fm", "<cmd>Telescope marks<cr>")
 map("n", "<leader>fr", "<cmd>Telescope registers<cr>")
 map("n", "<leader>ft", "<cmd>Telescope colorscheme enable_preview=true<cr>")
 map("n", "gO", "<cmd>Telescope lsp_document_symbols<cr>")
+
+-- Session Manager
+map("n", "<leader>fp", "<cmd>AutoSession search<cr>")
+map("n", "<leader>fs", "<cmd>AutoSession save<cr>")
 
 -- Exchange
 map("n", "cx", function() require("substitute.exchange").operator() end)
@@ -109,46 +114,47 @@ map("n", "<C-a>", function() require("dial.map").manipulate("increment", "normal
 -- ╰──────────────────────────────────────────────────────────╯
 vim.pack.add({
     -- Git
-    { src = "https://github.com/lewis6991/gitsigns.nvim" },
-    { src = "https://github.com/kdheepak/lazygit.nvim" },
-    { src = "https://github.com/niekdomi/conflict.nvim" },
+    { src = "lewis6991/gitsigns.nvim" },
+    { src = "kdheepak/lazygit.nvim" },
+    { src = "niekdomi/conflict.nvim" },
 
     -- LSP, Auto-completion & Formatter
-    { src = "https://github.com/mason-org/mason.nvim" },
-    { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-    { src = "https://github.com/RRethy/vim-illuminate" },
-    { src = "https://github.com/saghen/blink.cmp" },
-    { src = "https://github.com/stevearc/conform.nvim" },
-    { src = "https://github.com/stevearc/dressing.nvim" },
-    { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+    { src = "mason-org/mason.nvim" },
+    { src = "mason-org/mason-lspconfig.nvim" },
+    { src = "RRethy/vim-illuminate" },
+    { src = "saghen/blink.cmp" },
+    { src = "stevearc/conform.nvim" },
+    { src = "stevearc/dressing.nvim" },
+    { src = "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
     -- Telescope
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/nvim-mini/mini.icons" },
-    { src = "https://github.com/nvim-telescope/telescope.nvim" },
+    { src = "nvim-lua/plenary.nvim" },
+    { src = "nvim-mini/mini.icons" },
+    { src = "nvim-telescope/telescope.nvim" },
 
     -- Treesitter
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
-    { src = "https://github.com/windwp/nvim-ts-autotag" },
+    { src = "nvim-treesitter/nvim-treesitter" },
+    { src = "nvim-treesitter/nvim-treesitter-textobjects" },
+    { src = "windwp/nvim-ts-autotag" },
 
     -- Others
-    { src = "https://github.com/Exafunction/windsurf.nvim" },
-    { src = "https://github.com/gbprod/substitute.nvim" },
-    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-    { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
-    { src = "https://github.com/catppuccin/nvim" },
-    { src = "https://github.com/folke/flash.nvim" },
-    { src = "https://github.com/folke/todo-comments.nvim" },
-    { src = "https://github.com/karb94/neoscroll.nvim" },
-    { src = "https://github.com/kylechui/nvim-surround" },
-    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
-    { src = "https://github.com/max397574/better-escape.nvim" },
-    { src = "https://github.com/mikavilpas/yazi.nvim" },
-    { src = "https://github.com/monaqa/dial.nvim" },
-    { src = "https://github.com/numToStr/Comment.nvim" },
-    { src = "https://github.com/nvim-lualine/lualine.nvim" },
-    { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = "Exafunction/windsurf.nvim" },
+    { src = "MeanderingProgrammer/render-markdown.nvim" },
+    { src = "brenoprata10/nvim-highlight-colors" },
+    { src = "catppuccin/nvim" },
+    { src = "folke/flash.nvim" },
+    { src = "folke/todo-comments.nvim" },
+    { src = "gbprod/substitute.nvim" },
+    { src = "karb94/neoscroll.nvim" },
+    { src = "kylechui/nvim-surround" },
+    { src = "lukas-reineke/indent-blankline.nvim" },
+    { src = "max397574/better-escape.nvim" },
+    { src = "mikavilpas/yazi.nvim" },
+    { src = "monaqa/dial.nvim" },
+    { src = "numToStr/Comment.nvim" },
+    { src = "nvim-lualine/lualine.nvim" },
+    { src = "rmagatti/auto-session" },
+    { src = "windwp/nvim-autopairs" },
 })
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
@@ -164,6 +170,10 @@ require("plugins.lualine")
 require("plugins.scroll")
 require("plugins.telescope")
 require("plugins.treesitter")
+
+require("auto-session").setup({
+    auto_create = false,
+})
 
 require("better_escape").setup({
     mappings = {
@@ -183,7 +193,6 @@ package.preload["cmp"] = function()
         setup = { buffer = noop },
     }
 end
-
 require("codeium").setup({
     enable_cmp_source = false,
     virtual_text = {
@@ -256,11 +265,7 @@ require("ibl").setup({
 
 require("illuminate").configure({
     filetypes_denylist = { "markdown" },
-    modes_denylist = {
-        "v",
-        "V",
-        "\22", -- Visual Block?!
-    },
+    modes_denylist = { "v", "V", "\22" },
 })
 
 require("mason").setup()
