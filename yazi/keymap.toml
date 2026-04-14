@@ -59,5 +59,8 @@ prepend_keymap = [
   ] },
 
   # Drag and drop
-  { on = "<C-o>", run = "shell -- ripdrag %s -x 2>/dev/null &" }
+  { on = "<C-o>", run = "shell -- ripdrag %s -x 2>/dev/null &" },
+
+  # wrap around when selecting with 'space'
+  { on = "<Space>", run = ["toggle", "arrow next"] },
 ]
