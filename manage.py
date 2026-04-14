@@ -287,7 +287,7 @@ def cmd_update(_args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dotfiles",
-        description="Manage dotfiles — deploy to or sync from the live system.",
+        description="Manage dotfiles - deploy to or sync from the live system.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"
