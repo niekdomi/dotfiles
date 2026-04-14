@@ -1,7 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
-local ignore_patterns = { "build", "target", "node_modules", ".git" }
+local ignore_patterns = { "/build/", "/target/", "/node_modules/", "%.git/" }
 
 telescope.setup({
     defaults = {
