@@ -1,6 +1,8 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
+local ignore_patterns = { "build", "target", "node_modules", ".git" }
+
 telescope.setup({
     defaults = {
         vimgrep_arguments = {
@@ -35,15 +37,14 @@ telescope.setup({
                 ["q"] = actions.close,
             },
         },
-        file_ignore_patterns = {
-            "build/",
-            "node_modules/",
-            ".git/",
-        },
     },
     pickers = {
         find_files = {
             hidden = true,
+            file_ignore_patterns = ignore_patterns,
+        },
+        live_grep = {
+            file_ignore_patterns = ignore_patterns,
         },
     },
     extensions = {
