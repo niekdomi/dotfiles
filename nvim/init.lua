@@ -126,7 +126,6 @@ vim.pack.add({
 
     -- LSP, Auto-completion & Formatter
     { src = "https://github.com/mason-org/mason.nvim" },
-    { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
     { src = "https://github.com/RRethy/vim-illuminate" },
     { src = "https://github.com/saghen/blink.cmp" },
     { src = "https://github.com/stevearc/conform.nvim" },
@@ -141,7 +140,6 @@ vim.pack.add({
     -- Treesitter
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
-    { src = "https://github.com/windwp/nvim-ts-autotag" },
 
     -- Others
     { src = "https://github.com/Exafunction/windsurf.nvim" },
@@ -256,7 +254,7 @@ require("gitsigns").setup({
     current_line_blame = true,
     current_line_blame_opts = {
         virt_text = true,
-        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+        virt_text_pos = "eol",
         delay = 1000,
         ignore_whitespace = false,
         virt_text_priority = 100,
@@ -269,9 +267,7 @@ require("gitsigns").setup({
 
 require("grug-far").setup({
     engines = {
-        ripgrep = {
-            extraArgs = "--multiline -F",
-        },
+        ripgrep = { extraArgs = "--multiline -F" },
     },
 })
 
@@ -285,10 +281,6 @@ require("illuminate").configure({
 })
 
 require("mason").setup()
-
-require("mason-lspconfig").setup({
-    automatic_enable = true,
-})
 
 require("mini.icons").setup({
     style = "glyph",
@@ -305,17 +297,6 @@ require("nvim-highlight-colors").setup({
 })
 
 require("nvim-surround").setup()
-
-require("nvim-ts-autotag").setup({
-    opts = {
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = false,
-    },
-    per_filetype = {
-        ["rust"] = { enable_close = false, enable_rename = false },
-    },
-})
 
 require("render-markdown").setup({
     code = {

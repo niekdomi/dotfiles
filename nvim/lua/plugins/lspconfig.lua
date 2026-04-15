@@ -1,6 +1,6 @@
 require("mason-tool-installer").setup({
     ensure_installed = {
-        "bashls",
+        "bash-language-server",
         "clang-format",
         "clangd",
         "codebook",
@@ -14,7 +14,7 @@ require("mason-tool-installer").setup({
         "neocmakelsp",
         "prettierd",
         "ruff",
-        "rust_analyzer",
+        "rust-analyzer",
         "shellcheck",
         "shfmt",
         "stylua",
@@ -29,6 +29,30 @@ require("mason-tool-installer").setup({
 --------------------------------------------------------------------------------
 -- LSP server configurations
 --------------------------------------------------------------------------------
+
+-- NOTE: All servers must be added to the list to enable them
+vim.lsp.enable({
+    "bashls",
+    "clangd",
+    "codebook",
+    "cssls",
+    "emmylua_ls",
+    "eslint",
+    "golangci_lint_ls",
+    "gopls",
+    "html",
+    "jsonls",
+    "neocmake",
+    "ruff",
+    "rust_analyzer",
+    "svelte",
+    "tinymist",
+    "tombi",
+    "ts_ls",
+    "ty",
+    "yamlls",
+    "zls",
+})
 
 vim.lsp.config("bashls", {
     cmd = { "bash-language-server", "start" },
@@ -246,7 +270,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local map = function(mode, lhs, rhs, desc)
             vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, silent = true, desc = desc })
         end
-        
+
         -- stylua: ignore start
         map("n", "grr", "<cmd>Telescope lsp_references<CR>", "Show references")
         map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go definition")
