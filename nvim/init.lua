@@ -1,6 +1,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.g.loaded_python3_provider = 0
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -19,12 +21,14 @@ o.clipboard = "unnamedplus"
 -- o.cmdheight = 0
 o.cursorline = true
 o.expandtab = true
+o.fillchars = { eob = " " }
 o.ignorecase = true
 o.linebreak = true -- Break whole word
 o.number = true
 o.relativenumber = true
 o.shiftwidth = 4
 o.shortmess:append("I")
+o.shortmess:append("S")
 o.signcolumn = "yes"
 o.smartcase = true
 o.splitbelow = true
@@ -156,7 +160,6 @@ vim.pack.add({
     { src = "https://github.com/max397574/better-escape.nvim" },
     { src = "https://github.com/mikavilpas/yazi.nvim" },
     { src = "https://github.com/monaqa/dial.nvim" },
-    { src = "https://github.com/numToStr/Comment.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/rmagatti/auto-session" },
     { src = "https://github.com/windwp/nvim-autopairs" },
@@ -216,8 +219,6 @@ require("codeium").setup({
         },
     },
 })
-
-require("Comment").setup()
 
 require("conflict").setup({
     show_actions = false,

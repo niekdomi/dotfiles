@@ -80,6 +80,7 @@ require("lualine").setup({
             "filetype",
             "fileformat",
             "progress",
+            { "searchcount", maxcount = 10E3, timeout = 0 },
         },
         lualine_z = {
             { selectionCount },
