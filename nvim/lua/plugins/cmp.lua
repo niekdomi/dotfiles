@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: param-type-mismatch
 require("blink.cmp").setup({
     completion = {
         documentation = {

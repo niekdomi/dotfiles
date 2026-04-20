@@ -41,6 +41,7 @@ end
 -- Codeium Status & Refresh
 --------------------------------------------------------------------------------
 local ok_codeium, codeium = pcall(require, "codeium.virtual_text")
+---@cast codeium any
 
 -- Check if Codeium plugin is loaded, fallback if not
 local function codeiumStatus()
@@ -54,6 +55,7 @@ end
 if ok_codeium and codeium.set_statusbar_refresh then
     codeium.set_statusbar_refresh(function()
         local ok_lualine, lualine = pcall(require, "lualine")
+        ---@cast lualine any
         if ok_lualine then
             lualine.refresh()
         end

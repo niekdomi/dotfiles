@@ -96,7 +96,7 @@ vim.lsp.config("cssls", {
 vim.lsp.config("emmylua_ls", {
     cmd = { "emmylua_ls" },
     filetypes = { "lua" },
-    root_markers = { ".emmyrc.json", ".luarc.json", ".git" },
+    root_markers = { ".emmyrc.json", ".luarc.json", ".git", ".stylua.toml", "stylua.toml" },
     settings = {
         emmylua = {
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
@@ -142,6 +142,15 @@ vim.lsp.config("golangci_lint_ls", {
     cmd = { "golangci-lint-langserver" },
     filetypes = { "go", "gomod" },
     root_markers = { ".golangci.yml", ".golangci.yaml", "go.mod", ".git" },
+    init_options = {
+        command = {
+            "golangci-lint",
+            "run",
+            "--output.json.path=stdout",
+            "--show-stats=false",
+            "--issues-exit-code=1",
+        },
+    },
 })
 
 vim.lsp.config("gopls", {
@@ -313,6 +322,7 @@ end
 local state = { enabled = true, detailed = false }
 
 local function apply_diagnostics()
+    ---@diagnostic disable-next-line: param-type-mismatch
     vim.diagnostic.config({
         virtual_text = state.enabled and not state.detailed and {
             prefix = "●",
@@ -331,10 +341,8 @@ end
 
 -- Toggle bindings
 vim.keymap.set("n", "<Leader>tl", function()
-    if state.enabled then
-        state.detailed = not state.detailed
-        apply_diagnostics()
-    end
+    state.detailed = not state.detailed
+    apply_diagnostics()
 end, { desc = "Toggle detailed diagnostics" })
 
 vim.keymap.set("n", "<Leader>td", function()

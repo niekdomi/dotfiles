@@ -78,8 +78,8 @@ map("n", "<leader>fp", "<cmd>AutoSession search<cr>")
 map("n", "<leader>fs", "<cmd>AutoSession save<cr>")
 
 -- grug-far
-vim.keymap.set("n", "g/", function() require("grug-far").open() end)
-vim.keymap.set("v", "g/", function() require("grug-far").with_visual_selection() end)
+map("n", "g/", function() require("grug-far").open() end)
+map("v", "g/", function() require("grug-far").with_visual_selection() end)
 
 -- Exchange
 map("n", "cx", function() require("substitute.exchange").operator() end)
@@ -283,10 +283,9 @@ require("illuminate").configure({
 
 require("mason").setup()
 
-require("mini.icons").setup({
-    style = "glyph",
-})
-MiniIcons.mock_nvim_web_devicons()
+local mini_icons = require("mini.icons")
+mini_icons.setup({ style = "glyph" })
+mini_icons.mock_nvim_web_devicons()
 
 require("nvim-autopairs").setup()
 

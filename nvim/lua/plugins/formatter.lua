@@ -5,6 +5,7 @@ local function get_format_on_save(bufnr)
     return { timeout_ms = 500, lsp_format = "fallback" }
 end
 
+---@diagnostic disable-next-line: param-type-mismatch
 require("conform").setup({
     formatters_by_ft = {
         bash = { "shfmt" },
