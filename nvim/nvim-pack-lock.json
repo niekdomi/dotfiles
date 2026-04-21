@@ -13,7 +13,7 @@
       "src": "https://github.com/saghen/blink.cmp"
     },
     "conflict.nvim": {
-      "rev": "c6dc05e26b4b10673ff99f3d24cc5d51c4878e9a",
+      "rev": "63d094794220c91c39507c20576e75a90ace2c87",
       "src": "https://github.com/niekdomi/conflict.nvim"
     },
     "conform.nvim": {
@@ -76,10 +76,6 @@
       "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
-    "nvim-highlight-colors": {
-      "rev": "e2cb22089cc2358b2b995c09578224f142de6039",
-      "src": "https://github.com/brenoprata10/nvim-highlight-colors"
-    },
     "nvim-surround": {
       "rev": "9291040de8cd8a4439eb64c441e8d5d2bf884a5a",
       "src": "https://github.com/kylechui/nvim-surround"
@@ -97,12 +93,8 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "0fd43fb4b1f073931c4b481f5f3b7cea3749e190",
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
-    },
-    "substitute.nvim": {
-      "rev": "0d2077398552f069abccbd964a26dd7cd26882cd",
-      "src": "https://github.com/gbprod/substitute.nvim"
     },
     "telescope.nvim": {
       "rev": "028d9a0695a0cc4cfa893889f8c408ed7ccc8adc",
@@ -121,7 +113,7 @@
       "src": "https://github.com/Exafunction/windsurf.nvim"
     },
     "yazi.nvim": {
-      "rev": "982781518274c723202f73064e93beda7f0468fe",
+      "rev": "49b3417e4bc2002ce8003f8fca275fea1d710d50",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }

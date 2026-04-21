@@ -63,7 +63,6 @@ map({ "n", "v", "s", "x" }, "<leader>i", "~")
 map("t", "<C-Space>", [[<C-\><C-n>]])
 
 -- Telescope
-map("n", "<leader>fC", "<cmd>Telescope git_conflict<cr>")
 map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>")
 map("n", "<leader>fc", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
@@ -149,11 +148,9 @@ vim.pack.add({
     { src = "https://github.com/Exafunction/windsurf.nvim" },
     { src = "https://github.com/MagicDuck/grug-far.nvim" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-    { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
     { src = "https://github.com/catppuccin/nvim" },
     { src = "https://github.com/folke/flash.nvim" },
     { src = "https://github.com/folke/todo-comments.nvim" },
-    { src = "https://github.com/gbprod/substitute.nvim" },
     { src = "https://github.com/karb94/neoscroll.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
     { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
@@ -289,13 +286,6 @@ mini_icons.mock_nvim_web_devicons()
 
 require("nvim-autopairs").setup()
 
-require("nvim-highlight-colors").setup({
-    render = "virtual",
-    virtual_symbol = " ⬤",
-    virtual_symbol_position = "eow",
-    enabled_tailwind = true,
-})
-
 require("nvim-surround").setup()
 
 require("render-markdown").setup({
@@ -307,12 +297,6 @@ require("render-markdown").setup({
     heading = {
         sign = false,
         width = "block",
-    },
-})
-
-require("substitute").setup({
-    exchange = {
-        preserve_cursor_position = true,
     },
 })
 

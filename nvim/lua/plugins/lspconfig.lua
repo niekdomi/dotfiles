@@ -291,7 +291,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("i", "<C-s>", function() vim.lsp.buf.signature_help(float_opts) end, "Signature help")
         -- stylua: ignore end
 
-        vim.lsp.document_color.enable(false)
+        vim.lsp.document_color.enable(true, { bufnr = args.buf }, { style = "virtual" })
     end,
 })
 
