@@ -12,7 +12,6 @@ font-style-bold = "italic"
 font-feature = ss02, ss19
 # Use 'ss01' for fancy italic style
 
-
 # Cursor
 cursor-color = cell-foreground
 selection-foreground = cell-foreground
