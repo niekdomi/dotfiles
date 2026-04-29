@@ -185,6 +185,12 @@ vim.lsp.config("html", {
 vim.lsp.config("jsonls", {
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" },
+    settings = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
+    },
 })
 
 vim.lsp.config("ruff", {
@@ -261,6 +267,15 @@ vim.lsp.config("ty", {
 vim.lsp.config("yamlls", {
     cmd = { "yaml-language-server", "--stdio" },
     filetypes = { "yaml", "yaml.docker-compose" },
+    settings = {
+        yaml = {
+            schemaStore = {
+                enable = false,
+                url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+        },
+    },
 })
 
 vim.lsp.config("zls", {

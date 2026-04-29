@@ -60,7 +60,8 @@ map("n", "<leader>w", "<cmd>w<cr>")
 map("n", "<leader>tw", "<cmd>set wrap!<cr>")
 map("n", "#", "@@")
 map({ "n", "v", "s", "x" }, "<leader>i", "~")
-map("t", "<C-Space>", [[<C-\><C-n>]])
+map("t", "<C-m>", [[<C-\><C-n>]])
+map("n", "<C-c>", "<C-c>")
 
 -- Telescope
 map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>")
@@ -130,7 +131,7 @@ vim.pack.add({
     -- LSP, Auto-completion & Formatter
     { src = "https://github.com/mason-org/mason.nvim" },
     { src = "https://github.com/RRethy/vim-illuminate" },
-    { src = "https://github.com/saghen/blink.cmp" },
+    { src = "https://github.com/saghen/blink.cmp", version = "v1" },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/stevearc/dressing.nvim" },
     { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
@@ -144,7 +145,10 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 
+    { src = "https://github.com/coder/claudecode.nvim" },
+
     -- Others
+    { src = "https://github.com/b0o/schemastore.nvim" },
     { src = "https://github.com/Exafunction/windsurf.nvim" },
     { src = "https://github.com/MagicDuck/grug-far.nvim" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -167,6 +171,7 @@ vim.pack.add({
 -- ╰──────────────────────────────────────────────────────────╯
 vim.cmd("colorscheme catppuccin-mocha")
 require("theme")
+require("venv")
 
 require("plugins.cmp")
 require("plugins.flash")
@@ -311,3 +316,5 @@ require("yazi").setup({
         cycle_open_buffers = false,
     },
 })
+
+require("claudecode").setup()

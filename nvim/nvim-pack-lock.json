@@ -5,19 +5,24 @@
       "src": "https://github.com/rmagatti/auto-session"
     },
     "better-escape.nvim": {
-      "rev": "19a38aab94961016430905ebec30d272a01e9742",
+      "rev": "3f4bc0b326606264ff75967f59091b5ddada0554",
       "src": "https://github.com/max397574/better-escape.nvim"
     },
     "blink.cmp": {
-      "rev": "90d14caca4ae557665ab105080c27d5f289a2e30",
-      "src": "https://github.com/saghen/blink.cmp"
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'v1'"
+    },
+    "claudecode.nvim": {
+      "rev": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f",
+      "src": "https://github.com/coder/claudecode.nvim"
     },
     "conflict.nvim": {
-      "rev": "63d094794220c91c39507c20576e75a90ace2c87",
+      "rev": "67fe9e3cfecb8e5bb5d40dff58f8a072c34e7e63",
       "src": "https://github.com/niekdomi/conflict.nvim"
     },
     "conform.nvim": {
-      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "rev": "dca1a190aa85f9065979ef35802fb77131911106",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "dial.nvim": {
@@ -57,7 +62,7 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "b03fb0f20bc1d43daf558cda981a2be22e73ac42",
+      "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
@@ -96,8 +101,12 @@
       "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
+    "schemastore.nvim": {
+      "rev": "0c303573345e710a233f5ba75f9aadc05852771b",
+      "src": "https://github.com/b0o/schemastore.nvim"
+    },
     "telescope.nvim": {
-      "rev": "028d9a0695a0cc4cfa893889f8c408ed7ccc8adc",
+      "rev": "506338434fec5ad19cb1f8d45bf92d66c4917393",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "todo-comments.nvim": {
@@ -113,7 +122,7 @@
       "src": "https://github.com/Exafunction/windsurf.nvim"
     },
     "yazi.nvim": {
-      "rev": "49b3417e4bc2002ce8003f8fca275fea1d710d50",
+      "rev": "3ef2cd509e8b44bb4436e78834007f6342c7aaa5",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
