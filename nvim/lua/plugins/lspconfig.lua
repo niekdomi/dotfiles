@@ -6,7 +6,6 @@ require("mason-tool-installer").setup({
         "codebook",
         "css-lsp",
         "emmylua_ls",
-        "eslint-lsp",
         "golangci-lint-langserver",
         "gopls",
         "html-lsp",
@@ -21,7 +20,7 @@ require("mason-tool-installer").setup({
         "tinymist",
         "tombi",
         "ty",
-        "typescript-language-server",
+        "vtsls",
         "yaml-language-server",
     },
 })
@@ -34,10 +33,9 @@ require("mason-tool-installer").setup({
 vim.lsp.enable({
     "bashls",
     "clangd",
-    "codebook",
+    -- "codebook",
     "cssls",
     "emmylua_ls",
-    "eslint",
     "golangci_lint_ls",
     "gopls",
     "html",
@@ -102,40 +100,6 @@ vim.lsp.config("emmylua_ls", {
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
         },
     },
-})
-
-vim.lsp.config("eslint", {
-    cmd = { "vscode-eslint-language-server", "--stdio" },
-    filetypes = {
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "svelte",
-    },
-    root_markers = {
-        ".eslintrc",
-        ".eslintrc.js",
-        ".eslintrc.json",
-        "eslint.config.js",
-        "eslint.config.mjs",
-    },
-    settings = {
-        validate = "on",
-        run = "onType",
-        nodePath = "",
-        experimental = {
-            useFlatConfig = true,
-        },
-    },
-    before_init = function(params, config)
-        if params.rootPath then
-            config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
-                workingDirectory = { directory = params.rootPath },
-            })
-        end
-    end,
 })
 
 vim.lsp.config("golangci_lint_ls", {
@@ -253,9 +217,24 @@ vim.lsp.config("tombi", {
 })
 
 vim.lsp.config("ts_ls", {
-    cmd = { "typescript-language-server", "--stdio" },
+    cmd = { "vtsls", "--stdio" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+    settings = {
+        typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            inlayHints = {
+                parameterNames = { enabled = "all" },
+                parameterName = { enabled = true },
+                functionParameterType = { enabled = true },
+                variableType = { enabled = true },
+                variableTypeHintsWhenTypeMatchesName = { enabled = true },
+                propertyDeclarationType = { enabled = true },
+                functionLikeReturnType = { enabled = true },
+                enumMemberValue = { enabled = true },
+            },
+        },
+    },
 })
 
 vim.lsp.config("ty", {

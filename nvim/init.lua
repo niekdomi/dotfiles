@@ -145,10 +145,9 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 
-    { src = "https://github.com/coder/claudecode.nvim" },
-
     -- Others
-    { src = "https://github.com/b0o/schemastore.nvim" },
+    { src = "https://github.com/b0o/SchemaStore.nvim" },
+    { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/Exafunction/windsurf.nvim" },
     { src = "https://github.com/MagicDuck/grug-far.nvim" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -164,12 +163,14 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/rmagatti/auto-session" },
     { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = "https://github.com/windwp/nvim-ts-autotag" },
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.cmd("colorscheme catppuccin-mocha")
+
 require("theme")
 require("venv")
 
@@ -194,6 +195,8 @@ require("better_escape").setup({
         s = { j = { k = false } }, -- selection mode (snippets) fix
     },
 })
+
+require("claudecode").setup()
 
 -- Stub out "cmp" module for windsurf.nvim & dressing.nvim (expects nvim-cmp, but blink.cmp is used)
 package.preload["cmp"] = function()
@@ -293,6 +296,14 @@ require("nvim-autopairs").setup()
 
 require("nvim-surround").setup()
 
+require("nvim-ts-autotag").setup({
+    per_filetype = {
+        ["rust"] = {
+            enable_close = false,
+        },
+    },
+})
+
 require("render-markdown").setup({
     code = {
         border = "thin",
@@ -316,5 +327,3 @@ require("yazi").setup({
         cycle_open_buffers = false,
     },
 })
-
-require("claudecode").setup()
