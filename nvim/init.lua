@@ -60,7 +60,7 @@ map("n", "<leader>w", "<cmd>w<cr>")
 map("n", "<leader>tw", "<cmd>set wrap!<cr>")
 map("n", "#", "@@")
 map({ "n", "v", "s", "x" }, "<leader>i", "~")
-map("t", "<Esc><Esc>", [[<C-\><C-n>]])
+map("t", "<C-space>", [[<C-\><C-n>]])
 map("n", "<C-c>", "<C-c>")
 
 -- Telescope
