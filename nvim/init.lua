@@ -52,7 +52,6 @@ map("n", "x", "\"_x")
 map("n", "X", "\"_X")
 
 -- Editor / Editing
-map("n", "<leader>nh", "<cmd>nohl<cr>")
 map("n", "<leader>o", "o<Esc>")
 map("n", "<leader>O", "O<Esc>")
 map("n", "<leader>e", "<cmd>Yazi<cr>")
