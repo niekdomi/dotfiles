@@ -62,6 +62,8 @@ map({ "n", "v", "s", "x" }, "<leader>i", "~")
 map("t", "<C-space>", [[<C-\><C-n>]])
 map("n", "<C-c>", "<C-c>")
 
+map("c", "%s/", "%s/\\V", { noremap = true })
+
 -- Telescope
 map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>")
 map("n", "<leader>fc", "<cmd>Telescope live_grep<cr>")
