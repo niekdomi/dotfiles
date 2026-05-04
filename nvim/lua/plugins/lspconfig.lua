@@ -110,6 +110,7 @@ vim.lsp.config("golangci_lint_ls", {
         command = {
             "golangci-lint",
             "run",
+            "--fix",
             "--output.json.path=stdout",
             "--show-stats=false",
             "--issues-exit-code=1",

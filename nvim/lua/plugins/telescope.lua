@@ -7,7 +7,7 @@ telescope.setup({
     defaults = {
         vimgrep_arguments = {
             "rg",
-            "-L",
+            "--follow",
             "--color=never",
             "--no-heading",
             "--with-filename",
@@ -43,17 +43,11 @@ telescope.setup({
         find_files = {
             hidden = true,
             file_ignore_patterns = ignore_patterns,
+            sorter = require("telescope.sorters").get_fuzzy_file(),
         },
         live_grep = {
             file_ignore_patterns = ignore_patterns,
-        },
-    },
-    extensions = {
-        fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
+            sorter = require("telescope.sorters").get_fuzzy_file(),
         },
     },
 })
