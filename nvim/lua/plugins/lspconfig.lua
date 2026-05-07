@@ -11,7 +11,8 @@ require("mason-tool-installer").setup({
         "html-lsp",
         "json-lsp",
         "neocmakelsp",
-        "prettierd",
+        "oxfmt",
+        "oxlint",
         "ruff",
         "rust-analyzer",
         "shellcheck",
@@ -41,9 +42,10 @@ vim.lsp.enable({
     "html",
     "jsonls",
     "neocmake",
+    "oxlint",
     "ruff",
     "rust_analyzer",
-    "svelte",
+    "tailwindcss",
     "tinymist",
     "tombi",
     "ts_ls",
@@ -158,18 +160,36 @@ vim.lsp.config("jsonls", {
     },
 })
 
-vim.lsp.config("ruff", {
-    cmd = { "ruff", "server" },
-    filetypes = { "python" },
-    root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
-})
-
 vim.lsp.config("neocmake", {
     cmd = { "neocmakelsp", "stdio" },
     filetypes = { "cmake" },
     root_markers = { "CMakeLists.txt", ".git" },
 })
 
+vim.lsp.config("oxlint", {
+    cmd = { "oxlint", "--lsp" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    root_markers = { ".oxlintrc.json", "package.json", ".git" },
+})
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue" },
+    callback = function()
+        if vim.g.disable_autoformat or vim.b[vim.api.nvim_get_current_buf()].disable_autoformat then
+            return
+        end
+
+        vim.lsp.buf.code_action({
+            context = { only = { "source.fixAll.oxc" }, diagnostics = {} },
+            apply = true,
+        })
+    end,
+})
+
+vim.lsp.config("ruff", {
+    cmd = { "ruff", "server" },
+    filetypes = { "python" },
+    root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
+})
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.py",
     callback = function()
@@ -195,10 +215,10 @@ vim.lsp.config("rust_analyzer", {
     root_markers = { "Cargo.toml", ".git" },
 })
 
-vim.lsp.config("svelte", {
-    cmd = { "svelteserver", "--stdio" },
-    filetypes = { "svelte" },
-    root_markers = { "package.json", ".git" },
+vim.lsp.config("tailwindcss", {
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    filetypes = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    root_markers = { "tailwind.config.js", "tailwind.config.ts", "postcss.config.js" },
 })
 
 vim.lsp.config("tinymist", {

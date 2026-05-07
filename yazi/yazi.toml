@@ -32,8 +32,17 @@ max_height = 2000
 zathura = [{ run = "zathura %s", orphan = true, desc = "Zathura" }]
 papers = [{ run = "papers %s", orphan = true, desc = "Papers" }]
 firefox = [{ run = "firefox %s", orphan = true, desc = "Firefox" }]
+unzip = [
+  { run = '''
+    dest="${1%.*}"
+    i=1
+    while [ -e "$dest" ]; do dest="${1%.*}($i)"; i=$((i+1)); done
+    unzip "$1" -d "$dest"
+''', for = "unix", desc = "Extract here" }
+]
 
 [open]
 prepend_rules = [
   { mime = "application/pdf", use = ["zathura", "papers", "firefox", "reveal"] },
+  { mime = "application/zip", use = "unzip" },
 ]

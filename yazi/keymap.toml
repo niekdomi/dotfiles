@@ -63,4 +63,7 @@ prepend_keymap = [
 
   # wrap around when selecting with 'space'
   { on = "<Space>", run = ["toggle", "arrow next"] },
+
+  # Open terminal
+  { on = "!", for = "unix", run = 'shell "$SHELL" --block', desc = "Open $SHELL here" },
 ]
