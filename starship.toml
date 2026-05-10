@@ -1,37 +1,40 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = "https://starship.rs/config-schema.json"
 
 format = """
 [](color_surface0)\
-$os\
+    $os\
 [](fg:prev_fg bg:color_maroon)\
-$username\
-$hostname\
+    $username\
+    $hostname\
 [](fg:prev_bg bg:color_yellow)\
-$directory\
+    $directory\
 [](fg:prev_bg bg:color_teal)\
-$git_branch\
-$git_commit\
-$git_status\
+    $git_branch\
+    $git_commit\
+    $git_status\
 [](fg:prev_bg bg:color_blue)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[](fg:prev_bg bg:color_mauve)\
-$docker_context\
-$conda\
+    $c\
+    ${custom.cpp}\
+    $rust\
+    $golang\
+    $nodejs\
+    $php\
+    $java\
+    $kotlin\
+    $haskell\
+    $python\
+[](fg:prev_bg bg:color_mauve)\
+    $docker_context\
+    $conda\
+    $nix_shell\
+    $conda\
 [](fg:prev_bg bg:color_surface0)\
-$cmd_duration\
-$memory_usage\
+    $cmd_duration\
+    $memory_usage\
 [ ](fg:prev_bg)\
-$line_break$character"""
+    $line_break$character"""
 
-palette = 'catppuccin_mocha'
+palette = "catppuccin_mocha"
 
 [palettes.catppuccin_mocha]
 color_rosewater = "#f5e0dc"
@@ -95,33 +98,33 @@ style = "bg:prev_bg fg:prev_bg"
 format = "[$symbol ]($style)"
 
 [os.symbols]
-Windows = "[](fg:color_blue bg:prev_fg)"
-Ubuntu = "[](fg:color_peach bg:prev_fg)"
-SUSE = "[](fg:color_green bg:prev_fg)"
-Raspbian = "[󰐿](fg:color_red bg:prev_fg)"
-Mint = "[󰣭](fg:color_green bg:prev_fg)"
-Macos = "[󰀵](fg:color_text bg:prev_fg)"
-Manjaro = "[](fg:color_green bg:prev_fg)"
-Linux = "[󰌽](fg:color_text bg:prev_fg)"
-Gentoo = "[󰣨](fg:color_text bg:prev_fg)"
-Fedora = "[󰣛](fg:color_red bg:prev_fg)"
 Alpine = "[](fg:color_teal bg:prev_fg)"
 Amazon = "[](fg:color_peach bg:prev_fg)"
 Android = "[](fg:color_green bg:prev_fg)"
 Arch = "[󰣇](fg:color_blue bg:prev_fg)"
 Artix = "[󰣇](fg:color_blue bg:prev_fg)"
-EndeavourOS = "[](fg:color_mauve bg:prev_fg)"
 CentOS = "[](fg:color_blue bg:prev_fg)"
 Debian = "[󰣚](fg:color_red bg:prev_fg)"
-Redhat = "[󱄛](fg:color_red bg:prev_fg)"
-RedHatEnterprise = "[󱄛](fg:color_red bg:prev_fg)"
+EndeavourOS = "[](fg:color_mauve bg:prev_fg)"
+Fedora = "[󰣛](fg:color_red bg:prev_fg)"
+Gentoo = "[󰣨](fg:color_text bg:prev_fg)"
+Linux = "[󰌽](fg:color_text bg:prev_fg)"
+Macos = "[󰀵](fg:color_text bg:prev_fg)"
+Manjaro = "[](fg:color_green bg:prev_fg)"
+Mint = "[󰣭](fg:color_green bg:prev_fg)"
 Pop = "[](fg:color_teal bg:prev_fg)"
+Raspbian = "[󰐿](fg:color_red bg:prev_fg)"
+RedHatEnterprise = "[󱄛](fg:color_red bg:prev_fg)"
+Redhat = "[󱄛](fg:color_red bg:prev_fg)"
+SUSE = "[](fg:color_green bg:prev_fg)"
+Ubuntu = "[](fg:color_peach bg:prev_fg)"
+Windows = "[](fg:color_blue bg:prev_fg)"
 
 [username]
 # by default only shows on SSH
 style_user = "bg:prev_bg fg:color_crust"
 style_root = "bg:prev_bg fg:color_crust"
-format = '[  $user ]($style)'
+format = "[  $user ]($style)"
 
 [hostname]
 # by default only shows on SSH
@@ -140,7 +143,7 @@ read_only = "󰌾 "
 [git_branch]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol $branch ]($style)'
+format = "[ $symbol $branch ]($style)"
 
 [git_commit]
 style = "fg:prev_fg bg:prev_bg"
@@ -148,62 +151,75 @@ format = "[($tag)]($style) "
 
 [git_status]
 style = "fg:color_crust bg:prev_bg"
-format = '[($all_status$ahead_behind )]($style)'
+format = "[($all_status$ahead_behind )]($style)"
 
 [nodejs]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ](fg:color_crust bg:prev_bg)'
+format = "[ $symbol( $version) ](fg:color_crust bg:prev_bg)"
 
 [c]
 symbol = " "
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
+
+[custom.cpp]
+symbol = "󰙲 "
+style = "fg:color_crust bg:prev_bg"
+format = "[ $symbol( $version) ]($style)"
 
 [rust]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [golang]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [php]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [java]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [kotlin]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [haskell]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version) ]($style)'
+format = "[ $symbol( $version) ]($style)"
 
 [python]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $version)( $virtualenv) ]($style)'
+format = "[ $symbol( $version)( $virtualenv) ]($style)"
 
 [docker_context]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $context) ]($style)'
+format = "[ $symbol( $context) ]($style)"
+
+[nix_shell]
+symbol = "󱄅"
+style = "fg:color_crust bg:prev_bg"
+format = '[ $symbol( $state)( \($name\)) ]($style)'
+impure_msg = "impure"
+pure_msg = "pure"
+unknown_msg = ""
 
 [conda]
 symbol = ""
 style = "fg:color_crust bg:prev_bg"
-format = '[ $symbol( $environment) ]($style)'
+format = "[ $symbol( $environment) ]($style)"
 
 [cmd_duration]
 style = "fg:prev_fg bg:prev_bg"
@@ -214,7 +230,7 @@ format = """
 [╰─$symbol](fg:current_line) """
 success_symbol = "[\\[I\\]](bold fg:color_green)"
 error_symbol = "[\\[I\\]](bold fg:color_red)"
-vicmd_symbol = "[\\[N\\]](bold fg:color_blue)"
+vimcmd_symbol = "[\\[N\\]](bold fg:color_blue)"
 vimcmd_replace_one_symbol = "[\\[R\\]](bold fg:color_red)"
 vimcmd_replace_symbol = "[\\[R\\]](bold fg:color_red)"
 vimcmd_visual_symbol = "[\\[V\\]](bold fg:color_mauve)"
