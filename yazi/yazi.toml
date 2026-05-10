@@ -1,24 +1,8 @@
 [plugin]
-prepend_previewers = [
-  # Archive previewer
-  { mime = "application/*zip", run = "ouch" },
-  { mime = "application/x-tar", run = "ouch" },
-  { mime = "application/x-bzip2", run = "ouch" },
-  { mime = "application/x-7z-compressed", run = "ouch" },
-  { mime = "application/x-rar", run = "ouch" },
-  { mime = "application/x-xz", run = "ouch" },
-  { mime = "application/xz", run = "ouch" },
+prepend_fetchers = [
+  { id = "git", url = "*", run = "git", group = "none" },
+  { id = "git", url = "*/", run = "git", group = "none" }
 ]
-
-[[plugin.prepend_fetchers]]
-id = "git"
-url = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id = "git"
-url = "*/"
-run = "git"
 
 [mgr]
 linemode = "rtime"
@@ -34,15 +18,36 @@ papers = [{ run = "papers %s", orphan = true, desc = "Papers" }]
 firefox = [{ run = "firefox %s", orphan = true, desc = "Firefox" }]
 unzip = [
   { run = '''
-    dest="${1%.*}"
+    archive="$1"
+    base="${archive%.*}"
+    dest="$base"
     i=1
-    while [ -e "$dest" ]; do dest="${1%.*}($i)"; i=$((i+1)); done
-    unzip "$1" -d "$dest"
+    while [ -e "$dest" ]; do dest="${base}_$((i++))"; done
+
+    tops=$(unzip -Z1 "$archive" | sed 's|/.*||' | sort -u)
+    if [ "$(printf '%s\n' "$tops" | grep -c .)" -eq 1 ] && \
+       unzip -Z1 "$archive" | grep -qFm1 "$tops/"; then
+      unzip -n "$archive" -d "$(dirname "$archive")"
+    else
+      unzip -n "$archive" -d "$dest"
+    fi
 ''', for = "unix", desc = "Extract here" }
+]
+reveal_dir = [{ run = 'xdg-open "%d"', desc = "Reveal in Explorer" }]
+extract_pass_7z = [
+  { run = '7z x "$s"', block = true, desc = "Extract Password encrypted" }
+]
+extract_pass_zip = [
+  { run = 'unzip "$s"', block = true, desc = "Extract Password encrypted" }
 ]
 
 [open]
 prepend_rules = [
   { mime = "application/pdf", use = ["zathura", "papers", "firefox", "reveal"] },
-  { mime = "application/zip", use = "unzip" },
+  { mime = "application/zip", use = ["unzip", "extract_pass_zip", "reveal_dir"] },
+  { mime = "application/x-7z-compressed", use = [
+    "extract_pass_7z",
+    "reveal_dir",
+  ] },
+  { mime = "application/x-tar", use = ["reveal_dir"] },
 ]

@@ -13,11 +13,10 @@ prepend_keymap = [
   { on = ["9"], run = "plugin relative-motions 9", desc = "Move in relative steps" },
 
   # Compress files
-  { on = ["c", "a", "a"], run = "plugin compress", desc = "Archive selected files" },
-  { on = ["c", "a", "p"], run = "plugin compress -p", desc = "Archive selected files (password)" },
-  { on = ["c", "a", "h"], run = "plugin compress -ph", desc = "Archive selected files (password+header)" },
-  { on = ["c", "a", "l"], run = "plugin compress -l", desc = "Archive selected files (compression level)" },
-  { on = ["c", "a", "u"], run = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
+  { on = ["c", "a", "a", "7"], run = "plugin compress '7z'", desc = "Archive to 7z" },
+  { on = ["c", "a", "a", "z"], run = "plugin compress zip", desc = "Archive to zip" },
+  { on = ["c", "a", "p", "7"], run = "plugin compress '-p 7z'", desc = "Archive to 7z + password" },
+  { on = ["c", "a", "p", "z"], run = "plugin compress '-p zip'", desc = "Archive to zip + password" },
 
   # Lazygit
   { on = ["L"], run = "plugin lazygit", desc = "Run LazyGit" },
