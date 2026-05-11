@@ -22,6 +22,8 @@ o.clipboard = "unnamedplus"
 o.cursorline = true
 o.expandtab = true
 o.fillchars = { eob = " " }
+o.list = true
+o.listchars = { leadmultispace = "│   ", leadtab = "│ ", tab = "  " }
 o.ignorecase = true
 o.linebreak = true -- Break whole word
 o.number = true
@@ -37,6 +39,18 @@ o.swapfile = false
 o.tabstop = 4
 o.undofile = true
 o.wrap = false
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "OptionSet" }, {
+    pattern = { "*", "shiftwidth" },
+    callback = function()
+        local sw = vim.api.nvim_get_option_value("shiftwidth", { buf = 0 }) --[[@as integer]]
+        if sw == 0 then
+            sw = vim.o.shiftwidth
+        end
+        vim.opt_local.listchars =
+            { leadmultispace = "│" .. string.rep(" ", sw - 1), leadtab = "│ ", tab = "  " }
+    end,
+})
 
 -- Mouse
 o.mousemodel = "extend"
@@ -82,11 +96,6 @@ map("n", "<leader>fs", "<cmd>AutoSession save<cr>")
 map("n", "g/", function() require("grug-far").open() end)
 map("v", "g/", function() require("grug-far").with_visual_selection() end)
 
--- Exchange
-map("n", "cx", function() require("substitute.exchange").operator() end)
-map("n", "cxx", function() require("substitute.exchange").line() end)
-map("x", "X", function() require("substitute.exchange").visual() end)
-
 -- Clear registers
 map("n", "cr", function()
     local regs = "abcdefghijklmnopqrstuvwxyz0123456789/-\"*+"
@@ -111,9 +120,10 @@ map("n", "gl", "<cmd>LazyGit<cr>")
 map("n", "gB", "<cmd>Gitsigns blame_line<cr>")
 
 map("n", "gh", function()
-    vim.cmd("Gitsigns toggle_word_diff")
-    vim.cmd("Gitsigns toggle_deleted")
-    vim.cmd("Gitsigns toggle_linehl")
+    local gs = require("gitsigns")
+    gs.toggle_word_diff()
+    gs.toggle_deleted()
+    gs.toggle_linehl()
 end)
 
 -- Dial (Enhanced increment/decrement)
@@ -157,7 +167,6 @@ vim.pack.add({
     { src = "https://github.com/folke/todo-comments.nvim" },
     { src = "https://github.com/karb94/neoscroll.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
-    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
     { src = "https://github.com/max397574/better-escape.nvim" },
     { src = "https://github.com/mikavilpas/yazi.nvim" },
     { src = "https://github.com/monaqa/dial.nvim" },
@@ -170,7 +179,7 @@ vim.pack.add({
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd.colorscheme("catppuccin-mocha")
 
 require("theme")
 require("venv")
@@ -188,6 +197,7 @@ require("auto-session").setup({
     auto_create = false,
 })
 
+---@diagnostic disable-next-line: param-type-mismatch
 require("better_escape").setup({
     mappings = {
         i = { j = { j = false, k = "<ESC>" } },
@@ -197,6 +207,7 @@ require("better_escape").setup({
     },
 })
 
+---@diagnostic disable-next-line: undefined-field
 require("claudecode").setup()
 
 -- Stub out "cmp" module for windsurf.nvim & dressing.nvim (expects nvim-cmp, but blink.cmp is used)
@@ -278,10 +289,6 @@ require("grug-far").setup({
     },
 })
 
-require("ibl").setup({
-    scope = { enabled = false },
-})
-
 require("illuminate").configure({
     filetypes_denylist = { "markdown" },
     modes_denylist = { "v", "V", "\22" },
@@ -297,6 +304,7 @@ require("nvim-autopairs").setup()
 
 require("nvim-surround").setup()
 
+---@diagnostic disable-next-line: param-type-mismatch
 require("nvim-ts-autotag").setup({
     per_filetype = {
         ["rust"] = {

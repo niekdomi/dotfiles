@@ -45,7 +45,6 @@ vim.lsp.enable({
     "oxlint",
     "ruff",
     "rust_analyzer",
-    "tailwindcss",
     "tinymist",
     "tombi",
     "ts_ls",
@@ -213,12 +212,6 @@ vim.lsp.config("rust_analyzer", {
     cmd = { "rust-analyzer" },
     filetypes = { "rust" },
     root_markers = { "Cargo.toml", ".git" },
-})
-
-vim.lsp.config("tailwindcss", {
-    cmd = { "tailwindcss-language-server", "--stdio" },
-    filetypes = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    root_markers = { "tailwind.config.js", "tailwind.config.ts", "postcss.config.js" },
 })
 
 vim.lsp.config("tinymist", {
