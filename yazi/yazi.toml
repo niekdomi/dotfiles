@@ -18,19 +18,12 @@ papers = [{ run = "papers %s", orphan = true, desc = "Papers" }]
 firefox = [{ run = "firefox %s", orphan = true, desc = "Firefox" }]
 unzip = [
   { run = '''
-    archive="$1"
-    base="${archive%.*}"
-    dest="$base"
+    dir="$(dirname "$1")"
+    base="$(basename "${1%.*}")"
+    dest="$dir/$base"
     i=1
-    while [ -e "$dest" ]; do dest="${base}_$((i++))"; done
-
-    tops=$(unzip -Z1 "$archive" | sed 's|/.*||' | sort -u)
-    if [ "$(printf '%s\n' "$tops" | grep -c .)" -eq 1 ] && \
-       unzip -Z1 "$archive" | grep -qFm1 "$tops/"; then
-      unzip -n "$archive" -d "$(dirname "$archive")"
-    else
-      unzip -n "$archive" -d "$dest"
-    fi
+    while [ -e "$dest" ]; do dest="$dir/${base}_$((i++))"; done
+    unzip "$1" -d "$dest"
 ''', for = "unix", desc = "Extract here" }
 ]
 reveal_dir = [{ run = 'xdg-open "%d"', desc = "Reveal in Explorer" }]
