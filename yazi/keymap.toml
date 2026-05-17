@@ -65,4 +65,10 @@ prepend_keymap = [
 
   # Open terminal
   { on = "!", for = "unix", run = 'shell "$SHELL" --block', desc = "Open $SHELL here" },
+
+  # Go to nvim CWD (or git root as fallback)
+  { on = ["g", "r"], run = '''shell -- ya emit-to "$YAZI_ID" cd --str "$NVIM_CWD"''', desc = "Go to nvim CWD" },
+
+  # Go to ~/Documents
+  { on = ["g", "D"], run = "cd ~/Documents", desc = "Go ~/Documents" },
 ]
