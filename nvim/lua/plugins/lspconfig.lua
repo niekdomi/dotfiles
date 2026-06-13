@@ -280,10 +280,7 @@ vim.lsp.config("zls", {
 -- LSP keybindings
 --------------------------------------------------------------------------------
 
-local float_opts = {
-    border = "rounded",
-    -- max_width = 70,
-}
+local float_opts = { border = "rounded", max_width = 70 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
