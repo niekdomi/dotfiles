@@ -47,8 +47,11 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "OptionSet" }, {
         if sw == 0 then
             sw = vim.o.shiftwidth
         end
-        vim.opt_local.listchars =
-            { leadmultispace = "│" .. string.rep(" ", sw - 1), leadtab = "│ ", tab = "  " }
+        vim.opt_local.listchars = {
+            leadmultispace = "│" .. string.rep(" ", sw - 1),
+            leadtab = "│ ",
+            tab = "  ",
+        }
     end,
 })
 
@@ -158,7 +161,6 @@ vim.pack.add({
 
     -- Others
     { src = "https://github.com/b0o/SchemaStore.nvim" },
-    { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/Exafunction/windsurf.nvim" },
     { src = "https://github.com/MagicDuck/grug-far.nvim" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -173,7 +175,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/rmagatti/auto-session" },
     { src = "https://github.com/windwp/nvim-autopairs" },
-    { src = "https://github.com/windwp/nvim-ts-autotag" },
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -206,9 +207,6 @@ require("better_escape").setup({
         s = { j = { k = false } }, -- selection mode (snippets) fix
     },
 })
-
----@diagnostic disable-next-line: undefined-field
-require("claudecode").setup()
 
 -- Stub out "cmp" module for windsurf.nvim & dressing.nvim (expects nvim-cmp, but blink.cmp is used)
 package.preload["cmp"] = function()
@@ -303,15 +301,6 @@ mini_icons.mock_nvim_web_devicons()
 require("nvim-autopairs").setup()
 
 require("nvim-surround").setup()
-
----@diagnostic disable-next-line: param-type-mismatch
-require("nvim-ts-autotag").setup({
-    per_filetype = {
-        ["rust"] = {
-            enable_close = false,
-        },
-    },
-})
 
 require("render-markdown").setup({
     code = {

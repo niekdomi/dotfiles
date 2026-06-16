@@ -32,6 +32,7 @@ telescope.setup({
             i = {
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-j>"] = actions.move_selection_next,
+                ["<C-Space>"] = actions.to_fuzzy_refine,
                 ["<esc>"] = actions.close,
             },
             n = {
@@ -43,11 +44,9 @@ telescope.setup({
         find_files = {
             hidden = true,
             file_ignore_patterns = ignore_patterns,
-            sorter = require("telescope.sorters").get_fuzzy_file(),
         },
         live_grep = {
             file_ignore_patterns = ignore_patterns,
-            sorter = require("telescope.sorters").get_fuzzy_file(),
         },
     },
 })

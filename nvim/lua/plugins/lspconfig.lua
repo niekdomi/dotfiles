@@ -293,11 +293,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go definition")
         map("n", "gD", "<cmd>tab split | Telescope lsp_definitions<CR>", "Definition in tab")
         map("n", "<leader>D", "<cmd>Telescope diagnostics<CR>", "Show diagnostics")
-        map( "n", "<leader>dp", function() vim.diagnostic.jump({ count = -1, float = false }) end, "Prev diagnostic")
-        map( "n", "<leader>dn", function() vim.diagnostic.jump({ count = 1, float = false }) end, "Next diagnostic")
+        map("n", "<leader>dp", function() vim.diagnostic.jump({ count = -1, float = false }) end, "Prev diagnostic")
+        map("n", "<leader>dn", function() vim.diagnostic.jump({ count = 1, float = false }) end, "Next diagnostic")
         map("n", "K", function() vim.lsp.buf.hover(float_opts) end, "Show documentation")
         map("i", "<C-s>", function() vim.lsp.buf.signature_help(float_opts) end, "Signature help")
         -- stylua: ignore end
+
+        -- Tinymist multi-file projects: pin/unpin the main file so labels and includes resolve correctly
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "tinymist" then
+            vim.api.nvim_buf_create_user_command(
+                args.buf,
+                "TinymistPinMain",
+                function()
+                    client:exec_cmd({
+                        title = "pin",
+                        command = "tinymist.pinMain",
+                        arguments = { vim.api.nvim_buf_get_name(0) },
+                    }, { bufnr = args.buf })
+                end,
+                { desc = "Pin the current file as the tinymist main file" }
+            )
+
+            vim.api.nvim_buf_create_user_command(
+                args.buf,
+                "TinymistUnpinMain",
+                function()
+                    client:exec_cmd({
+                        title = "unpin",
+                        command = "tinymist.pinMain",
+                        arguments = { vim.v.null },
+                    }, { bufnr = args.buf })
+                end,
+                { desc = "Unpin the tinymist main file" }
+            )
+        end
 
         vim.lsp.document_color.enable(true, { bufnr = args.buf }, { style = "virtual" })
     end,
