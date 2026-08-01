@@ -5,13 +5,13 @@ hash = "92fbb5483657fa7976cdf4e0104e18e0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "1db18bb"
-hash = "eff8ff12fa4e5f035a10d8aeeb4c258d"
+rev = "bfdc423"
+hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "1db18bb"
-hash = "c8d30a70659f1b880407e61c564ab4e8"
+rev = "bfdc423"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
@@ -20,28 +20,28 @@ hash = "6ea5f37c7f219671ec504cb8311f889d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "1db18bb"
-hash = "e3260d0b1feded8c8e3ae3afa1169e30"
+rev = "bfdc423"
+hash = "46cbdc05596a3ecd730b288e28c7079d"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
-rev = "0e08704"
-hash = "e4d7c06510b4fe5f64ae31fbb4e017d6"
+rev = "7bfcfcb"
+hash = "bbb1569978e6d2b3e8343c6ca08a4ea6"
 
 [[plugin.deps]]
 use = "DreamMaoMao/searchjump"
-rev = "cab627c"
-hash = "4df5f3783cbbfed60466f1aa9bc45b5e"
+rev = "8a1a785"
+hash = "36bf4d772125a51af4ef440c06820e32"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "a837101"
-hash = "635b0feb9215772d22020eb0abf0bb34"
+rev = "159eaba"
+hash = "7de446280b1ba8c49ffd86dbc24bbbe6"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "1db18bb"
-hash = "9c7987da2d2a2120dac33abb64132004"
+rev = "bfdc423"
+hash = "15e5b67a241172cbb86b8fbf9e63692"
 
 [[plugin.deps]]
 use = "boydaihungst/relative-motions"
@@ -50,15 +50,15 @@ hash = "cb389a36241ada4893796d89dd5da7a0"
 
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "46a6b9f"
-hash = "771af2becc575a3f43d0542de823969d"
+rev = "e60e122"
+hash = "fbaf0adc8efc59555b748d36aab62d40"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "0670801"
+rev = "1a5f787"
 hash = "7dfe41c9c3d9be76da8a844263d0bbed"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "0670801"
+rev = "1a5f787"
 hash = "b8f46853c27707115f25f3423a47bd38"

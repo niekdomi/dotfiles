@@ -9,16 +9,12 @@
 //    - No TOC
 //    - In-Editor PDF-Viewer (needed?)
 //   - TODO-comments: search for comments
-//   - Bugs:
-//     - Java go to definition not working
-//     - C# go to definition results in empty file
 // - VIM:
-//   - Block comments with gbc not available
 //   - flash.nvim
 //   - Scroll percentage missing
 //   - / search should use smart-case so writing in capital is case-sensitive
-//   - Do not need to press enter to accept completion
-//   - Don't select the first suggestion when pressing enter
+//   - Do not need to press enter to accept completion (subjective)
+//   - Don't select the first suggestion when pressing enter (subjective)
 //   - / search should not remove highlighting when pressing esc (only when :nohl)
 //   - Show live changes when changing regex with %s  https://github.com/zed-industries/zed/issues/4411
 //   - Vim mode in rename pop-up
@@ -33,20 +29,18 @@
 //   - Test explorer
 //   - Icons in outline
 //   - Cursor animation
-//   - Change editor size with ctrl+scroll
 //   - Show amount of copilot options e.g. 2/7
 //   - Render markdown like obsidian (would be nice for text thread)
 //   - Proper CMake implementation (for nice c++ development)
 //   - HTML in Editor preview (Web page preview)
 //   - Python notebook
 //   - PDF Viewer
-//   - Better outline
+//   - Better (more complete) outline
 //   - Undotree
 //   - Revert shitty completion ui/bindings
 //   - Inverted cursor color
 //   - Ligatures under cursor not rendered correctly
 //   - autocompletion: Better UI
-//   - Telescope like window
 // - Terminal:
 //   - Italic text
 //   - Render TUI border/height correctly
@@ -54,23 +48,7 @@
 
 {
   // Updating with package manager
-  "agent_servers": {
-    "claude-acp": {
-      "default_config_options": {
-        "model": "opus",
-      },
-      "type": "registry",
-    },
-    "gemini": {
-      "type": "registry",
-    },
-  },
   "auto_update": false,
-
-  // "smooth_scroll": {
-  //   "duration": 0.2,
-  //   "enabled": true,
-  // },
 
   // Auto-install extensions
   "auto_install_extensions": {
@@ -87,6 +65,10 @@
     "xml": true,
   },
 
+  "session": {
+    "trust_all_worktrees": true,
+  },
+
   // ╭──────────────────────────────────────────────────────────╮
   // │ Telemetry                                                │
   // ╰──────────────────────────────────────────────────────────╯
@@ -99,9 +81,11 @@
   // │ UI                                                       │
   // ╰──────────────────────────────────────────────────────────╯
   "collaboration_panel": {
+    "dock": "left",
     "button": true,
   },
   "git_panel": {
+    "dock": "left",
     "tree_view": true,
   },
   "gutter": {
@@ -109,23 +93,17 @@
     "min_line_number_digits": 3,
     // "runnables": false
   },
-  "notification_panel": {
-    "button": false,
-  },
   "outline_panel": {
     "button": false,
     "dock": "right",
   },
   "project_panel": {
-    "auto_reveal_entries": false,
+    "dock": "left",
+    // "auto_reveal_entries": false,
     "folder_icons": false,
-    "line_numbers": "relative",
     "hide_root": true,
     "indent_size": 25,
     "sticky_scroll": false,
-  },
-  "search": {
-    "button": true,
   },
   "status_bar": {
     "line_endings_button": true,
@@ -139,7 +117,7 @@
     "file_icons": true,
   },
   "title_bar": {
-    "show_branch_icon": true,
+    "show_branch_status_icon": true,
   },
   "toolbar": {
     "breadcrumbs": false,
@@ -152,6 +130,7 @@
   // ╰──────────────────────────────────────────────────────────╯
   "always_treat_brackets_as_autoclosed": true,
   "auto_signature_help": false,
+  "completion_menu_item_kind": "symbol",
   "diagnostics": {
     "inline": {
       "enabled": true,
@@ -160,6 +139,7 @@
       "max_severity": "warning",
     },
   },
+  "format_on_save": "on",
   "git": {
     "inline_blame": {
       "enabled": true,
@@ -167,9 +147,10 @@
       "show_commit_summary": true,
     },
   },
-  "hide_mouse": "on_typing_and_movement",
+  "hide_mouse": "on_typing_and_action",
   "inline_code_actions": false,
   "middle_click_paste": false,
+  "mouse_wheel_zoom": true,
   "semantic_tokens": "combined",
   "show_signature_help_after_edits": true,
   "vertical_scroll_margin": 0,
@@ -186,6 +167,7 @@
   "vim": {
     "toggle_relative_line_numbers": true,
     "highlight_on_yank_duration": 0,
+    "use_smartcase_find": true,
   },
   "which_key": {
     "enabled": true,
@@ -223,40 +205,8 @@
   // │ Assistant                                                │
   // ╰──────────────────────────────────────────────────────────╯
   "agent": {
-    "tool_permissions": {
-      "default": "allow",
-    },
-    "favorite_models": [
-      {
-        "provider": "copilot_chat",
-        "model": "claude-sonnet-4.6",
-        "enable_thinking": false,
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "gpt-4.1",
-        "enable_thinking": false,
-      },
-    ],
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5.3-codex",
-    },
-    "default_model": {
-      "effort": "high",
-      "enable_thinking": false,
-      "provider": "copilot_chat",
-      "model": "gpt-5-mini",
-    },
-    "default_profile": "write",
-    "model_parameters": [],
-    "use_modifier_to_send": true,
-    "show_turn_stats": true,
-  },
-  "show_edit_predictions": true,
-  "edit_predictions": {
-    "provider": "copilot",
-    "mode": "eager",
+    "sidebar_side": "right",
+    "dock": "right",
   },
   "disable_ai": false,
 
@@ -348,17 +298,8 @@
   // │ Language config                                          │
   // ╰──────────────────────────────────────────────────────────╯
   "languages": {
-    "C": {
-      "format_on_save": "on",
-    },
-    "C++": {
-      "format_on_save": "on",
-    },
     "Go": {
       "language_servers": ["gopls", "golangci-lint"],
-    },
-    "Markdown": {
-      "format_on_save": "on",
     },
     "LaTeX": {
       "formatter": {

@@ -12,6 +12,7 @@ font-style-bold = "italic"
 font-feature = ss02, ss19
 # Use 'ss01' for fancy italic style
 
+
 # Cursor
 cursor-color = cell-foreground
 selection-foreground = cell-foreground
@@ -36,6 +37,7 @@ confirm-close-surface = false
 # Miscellaneous
 gtk-toolbar-style = flat
 custom-shader = cursor_sweep.glsl
+desktop-notifications = false
 
 ### Keybinds
 keybind = ctrl+shift+r=reload_config

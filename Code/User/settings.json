@@ -301,7 +301,6 @@
       // "after": [ "\"", "_", "x" ]
     },
   ],
-  "editor.bracketPairColorization.enabled": false,
   "editor.experimental.preferTreeSitter.css": true,
   "editor.experimental.preferTreeSitter.ini": true,
   "editor.experimental.preferTreeSitter.regex": true,
@@ -318,8 +317,13 @@
   "terminal.integrated.enableImages": true,
   "security.workspace.trust.startupPrompt": "never",
   "breadcrumbs.enabled": false,
-  "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
   "debug.showVariableTypes": true,
   "chat.viewSessions.orientation": "stacked",
   "markdown.preview.doubleClickToSwitchToEditor": false,
+  "codeium.enableCodeLens": false,
+  "http.systemCertificatesNode": true,
+  "geminicodeassist.project": "titanium-coast-pgc82",
+  "svelte.enable-ts-plugin": true,
+  "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+  "editor.bracketPairColorization.enabled": false,
 }
